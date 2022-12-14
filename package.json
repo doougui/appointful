@@ -6,6 +6,7 @@
   "scripts": {
     "start": "tsnd --transpile-only --respawn --ignore-watch node_modules src/server.ts",
     "lint": "eslint src --max-warnings=0",
+    "test": "vitest",
     "typecheck": "tsc --project tsconfig.json --noEmit"
   },
   "dependencies": {
@@ -22,7 +23,8 @@
     "eslint-plugin-promise": "^6.0.0",
     "prettier": "2.8.1",
     "ts-node-dev": "^2.0.0",
-    "typescript": "*"
+    "typescript": "*",
+    "vitest": "^0.25.8"
   },
   "description": "A simple finances api"
 }
