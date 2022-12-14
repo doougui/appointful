@@ -1,5 +1,5 @@
 import express from 'express'
-import { router } from './routes'
+import { router } from './infra/http/routes'
 
 const app = express()
 

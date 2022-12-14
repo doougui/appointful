@@ -10,7 +10,7 @@ export class InMemoryAppointmentsRepository implements AppointmentsRepository {
     this.items.push(appointment)
   }
 
-  async findOverlappingAppointment (startsAt: Date, endsAt: Date): Promise<Appointment> {
+  async findOverlappingAppointment (startsAt: Date, endsAt: Date): Promise<Appointment | null> {
     const overlappingAppointment = this.items.find((appointment) => {
       return areIntervalsOverlapping(
         { start: startsAt, end: endsAt },
