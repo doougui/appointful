@@ -1,4 +1,4 @@
-import { AppointmentsRepository } from '../../../../application/repositories/appointments-repository';
+import { AppointmentsRepository } from '@application/repositories/appointments-repository';
 
 export class PrismaAppointmentsRepository implements AppointmentsRepository {
   async create() {

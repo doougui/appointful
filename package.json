@@ -4,7 +4,7 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "start": "tsnd --transpile-only --respawn --ignore-watch node_modules src/server.ts",
+    "dev": "tsnd -r tsconfig-paths/register --transpile-only --respawn --ignore-watch node_modules src/server.ts",
     "lint": "eslint src --max-warnings=0",
     "test": "vitest",
     "typecheck": "tsc --project tsconfig.json --noEmit"
@@ -27,6 +27,7 @@
     "eslint-plugin-promise": "^6.0.0",
     "prettier": "2.8.1",
     "ts-node-dev": "^2.0.0",
+    "tsconfig-paths": "^4.1.1",
     "typescript": "*",
     "vite-tsconfig-paths": "^4.0.3",
     "vitest": "^0.25.8"

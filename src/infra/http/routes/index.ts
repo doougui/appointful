@@ -1,4 +1,4 @@
-import '../container/registers';
+import '@infra/http/container/registers';
 import { Router } from 'express';
 import { appointmentsRoutes } from './appointments.routes';
 

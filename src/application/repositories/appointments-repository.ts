@@ -1,4 +1,4 @@
-import { Appointment } from '../entities/appointment';
+import { Appointment } from '@application/entities/appointment';
 
 export interface AppointmentsRepository {
   create: (appointment: Appointment) => Promise<void>;

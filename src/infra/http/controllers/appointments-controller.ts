@@ -1,7 +1,5 @@
 import { Request, Response } from 'express';
 import { injectable } from 'tsyringe';
-import { CreateAppointment } from '../../../application/use-cases/create-appointment';
-import { httpContainer } from '../container';
 
 @injectable()
 export class AppointmentsController {
@@ -10,9 +8,8 @@ export class AppointmentsController {
   }
 
   index(_: Request, res: Response) {
-    const createAppointmentUseCase = httpContainer.resolve(CreateAppointment);
-    console.log(createAppointmentUseCase.execute);
+    // const createAppointmentUseCase = httpContainer.resolve(CreateAppointment);
 
-    return res.json({ hello: 'world' }).end();
+    return res.json({ message: 'hello world' }).end();
   }
 }

@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import { container } from 'tsyringe';
-import { AppointmentsController } from '../controllers/appointments-controller';
+import { AppointmentsController } from '@infra/http/controllers/appointments-controller';
 
 const appointmentsRoutes = Router();
 

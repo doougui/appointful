@@ -1,6 +1,6 @@
 import { inject, injectable } from 'tsyringe';
-import { Appointment } from '../entities/appointment';
-import { AppointmentsRepository } from '../repositories/appointments-repository';
+import { Appointment } from '@application/entities/appointment';
+import { AppointmentsRepository } from '@application/repositories/appointments-repository';
 
 interface CreateAppointmentRequest {
   customer: string;
