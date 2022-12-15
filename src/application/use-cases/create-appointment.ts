@@ -1,33 +1,38 @@
-import { Appointment } from '../entities/appointment'
-import { AppointmentsRepository } from '../repositories/appointments-repository'
+import { Appointment } from '../entities/appointment';
+import { AppointmentsRepository } from '../repositories/appointments-repository';
 
 interface CreateAppointmentRequest {
-  customer: string
-  startsAt: Date
-  endsAt: Date
+  customer: string;
+  startsAt: Date;
+  endsAt: Date;
 }
 
-type CreateAppointmentResponse = Appointment
+type CreateAppointmentResponse = Appointment;
 
 export class CreateAppointment {
-  constructor (
-    private readonly appointmentsRepository: AppointmentsRepository
+  constructor(
+    private readonly appointmentsRepository: AppointmentsRepository,
   ) {}
 
-  async execute ({ customer, startsAt, endsAt }: CreateAppointmentRequest): Promise<CreateAppointmentResponse> {
-    const overlappingAppointment = await this.appointmentsRepository.findOverlappingAppointment(
-      startsAt,
-      endsAt
-    )
+  async execute({
+    customer,
+    startsAt,
+    endsAt,
+  }: CreateAppointmentRequest): Promise<CreateAppointmentResponse> {
+    const overlappingAppointment =
+      await this.appointmentsRepository.findOverlappingAppointment(
+        startsAt,
+        endsAt,
+      );
 
     if (overlappingAppointment) {
-      throw new Error('Another appointment overlaps this appointment dates')
+      throw new Error('Another appointment overlaps this appointment dates');
     }
 
-    const appointment = new Appointment({ customer, startsAt, endsAt })
+    const appointment = new Appointment({ customer, startsAt, endsAt });
 
-    await this.appointmentsRepository.create(appointment)
+    await this.appointmentsRepository.create(appointment);
 
-    return appointment
+    return appointment;
   }
 }

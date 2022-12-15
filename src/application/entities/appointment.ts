@@ -1,35 +1,47 @@
 export interface AppointmentProps {
-  customer: string
-  startsAt: Date
-  endsAt: Date
+  customer: string;
+  startsAt: Date;
+  endsAt: Date;
 }
 
 export class Appointment {
-  private readonly props: AppointmentProps
+  private readonly props: AppointmentProps;
 
-  get customer () {
-    return this.props.customer
+  public get customer() {
+    return this.props.customer;
   }
 
-  get startsAt () {
-    return this.props.startsAt
+  public set customer(customer: string) {
+    this.props.customer = customer;
   }
 
-  get endsAt () {
-    return this.props.endsAt
+  public get startsAt() {
+    return this.props.startsAt;
   }
 
-  constructor (props: AppointmentProps) {
-    const { startsAt, endsAt } = props
+  public set startsAt(startsAt: Date) {
+    this.props.startsAt = startsAt;
+  }
+
+  public get endsAt() {
+    return this.props.endsAt;
+  }
+
+  public set endsAt(endsAt: Date) {
+    this.props.endsAt = endsAt;
+  }
+
+  constructor(props: AppointmentProps) {
+    const { startsAt, endsAt } = props;
 
     if (startsAt <= new Date()) {
-      throw new Error('Invalid start date')
+      throw new Error('Invalid start date');
     }
 
     if (endsAt <= startsAt) {
-      throw new Error('Invalid end date')
+      throw new Error('Invalid end date');
     }
 
-    this.props = props
+    this.props = props;
   }
 }
