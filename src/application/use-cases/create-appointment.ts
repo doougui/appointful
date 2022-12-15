@@ -1,3 +1,4 @@
+import { inject, injectable } from 'tsyringe';
 import { Appointment } from '../entities/appointment';
 import { AppointmentsRepository } from '../repositories/appointments-repository';
 
@@ -9,9 +10,11 @@ interface CreateAppointmentRequest {
 
 type CreateAppointmentResponse = Appointment;
 
+@injectable()
 export class CreateAppointment {
   constructor(
-    private readonly appointmentsRepository: AppointmentsRepository,
+    @inject('AppointmentsRepository')
+    private appointmentsRepository: AppointmentsRepository,
   ) {}
 
   async execute({
@@ -26,7 +29,7 @@ export class CreateAppointment {
       );
 
     if (overlappingAppointment) {
-      throw new Error('Another appointment overlaps this appointment dates');
+      throw new Error('Another appointment overlaps this appointment dates.');
     }
 
     const appointment = new Appointment({ customer, startsAt, endsAt });

@@ -2,8 +2,11 @@
   "compilerOptions": {
     "target": "esnext",
     "module": "commonjs",
+    "baseUrl": "./",
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
     "noImplicitAny": true,
     "strictNullChecks": true,
     "skipLibCheck": true,

@@ -1,3 +1,4 @@
+import '../container/registers';
 import { Router } from 'express';
 import { appointmentsRoutes } from './appointments.routes';
 
