@@ -1,0 +1,45 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Patient {
+  id          String        @id
+  name        String
+  email       String        @unique
+  password    String
+  phone       String
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @default(now())
+  appointment Appointment[]
+}
+
+model Dentist {
+  id          String        @id
+  name        String
+  email       String        @unique
+  password    String
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @default(now())
+  Appointment Appointment[]
+}
+
+model Appointment {
+  id         String    @id
+  patient    Patient   @relation(fields: [patientId], references: [id])
+  dentist    Dentist   @relation(fields: [dentistId], references: [id])
+  startsAt   DateTime
+  endsAt     DateTime
+  canceledAt DateTime?
+  createdAt  DateTime  @default(now())
+  updatedAt  DateTime  @default(now())
+  patientId  String
+  dentistId  String
+}

@@ -4,8 +4,8 @@ import { Appointment } from './appointment';
 
 describe('Appointment', () => {
   it('creates an appointment', () => {
-    const startsAt = getFutureDate('2022-12-10');
-    const endsAt = getFutureDate('2022-12-11');
+    const startsAt = getFutureDate('2022-12-10 13:00');
+    const endsAt = getFutureDate('2022-12-10 16:00');
 
     const appointment = new Appointment({
       customer: 'John Doe',
@@ -18,8 +18,8 @@ describe('Appointment', () => {
   });
 
   it('cannot create an appointment with end date before start date', () => {
-    const startsAt = getFutureDate('2022-12-13');
-    const endsAt = getFutureDate('2022-12-12');
+    const startsAt = getFutureDate('2022-12-10 16:00');
+    const endsAt = getFutureDate('2022-12-10 15:00');
 
     expect(
       () =>
