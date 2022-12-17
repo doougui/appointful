@@ -23,8 +23,10 @@ describe('CreateAppointment', () => {
   });
 
   it('should not be able to create an appointment with overlapping dates', async () => {
-    const startsAt = getFutureDate('2022-12-10');
-    const endsAt = getFutureDate('2022-12-15');
+    const date = '2022-12-10';
+
+    const startsAt = getFutureDate(`${date} 09:00`);
+    const endsAt = getFutureDate(`${date} 12:00`);
 
     const appointmentsRepository = new InMemoryAppointmentsRepository();
     const createAppointment = new CreateAppointment(appointmentsRepository);
@@ -38,32 +40,32 @@ describe('CreateAppointment', () => {
     await expect(
       createAppointment.execute({
         customer: 'John Doe',
-        startsAt: getFutureDate('2022-12-14'),
-        endsAt: getFutureDate('2022-12-18'),
+        startsAt: getFutureDate(`${date} 11:00`),
+        endsAt: getFutureDate(`${date} 15:00`),
       }),
     ).rejects.toBeInstanceOf(AppointmentWithOverlappingDates);
 
     await expect(
       createAppointment.execute({
         customer: 'John Doe',
-        startsAt: getFutureDate('2022-12-08'),
-        endsAt: getFutureDate('2022-12-12'),
+        startsAt: getFutureDate(`${date} 08:00`),
+        endsAt: getFutureDate(`${date} 14:00`),
       }),
     ).rejects.toBeInstanceOf(AppointmentWithOverlappingDates);
 
     await expect(
       createAppointment.execute({
         customer: 'John Doe',
-        startsAt: getFutureDate('2022-12-08'),
-        endsAt: getFutureDate('2022-12-17'),
+        startsAt: getFutureDate(`${date} 08:00`),
+        endsAt: getFutureDate(`${date} 15:00`),
       }),
     ).rejects.toBeInstanceOf(AppointmentWithOverlappingDates);
 
     await expect(
       createAppointment.execute({
         customer: 'John Doe',
-        startsAt: getFutureDate('2022-12-11'),
-        endsAt: getFutureDate('2022-12-12'),
+        startsAt: getFutureDate(`${date} 09:30`),
+        endsAt: getFutureDate(`${date} 11:30`),
       }),
     ).rejects.toBeInstanceOf(AppointmentWithOverlappingDates);
   });
