@@ -3,6 +3,7 @@ import { CreateAppointment } from './create-appointment';
 import { Appointment } from '@application/entities/appointment';
 import { getFutureDate } from '@tests/utils/get-future-date';
 import { InMemoryAppointmentsRepository } from '@tests/repositories/in-memory-appointments-repository';
+import { AppointmentWithOverlappingDates } from './errors/appointment-with-overlapping-dates';
 
 describe('CreateAppointment', () => {
   it('should be able to create an appointment', async () => {
@@ -40,7 +41,7 @@ describe('CreateAppointment', () => {
         startsAt: getFutureDate('2022-12-14'),
         endsAt: getFutureDate('2022-12-18'),
       }),
-    ).rejects.toBeInstanceOf(Error);
+    ).rejects.toBeInstanceOf(AppointmentWithOverlappingDates);
 
     await expect(
       createAppointment.execute({
@@ -48,7 +49,7 @@ describe('CreateAppointment', () => {
         startsAt: getFutureDate('2022-12-08'),
         endsAt: getFutureDate('2022-12-12'),
       }),
-    ).rejects.toBeInstanceOf(Error);
+    ).rejects.toBeInstanceOf(AppointmentWithOverlappingDates);
 
     await expect(
       createAppointment.execute({
@@ -56,7 +57,7 @@ describe('CreateAppointment', () => {
         startsAt: getFutureDate('2022-12-08'),
         endsAt: getFutureDate('2022-12-17'),
       }),
-    ).rejects.toBeInstanceOf(Error);
+    ).rejects.toBeInstanceOf(AppointmentWithOverlappingDates);
 
     await expect(
       createAppointment.execute({
@@ -64,6 +65,6 @@ describe('CreateAppointment', () => {
         startsAt: getFutureDate('2022-12-11'),
         endsAt: getFutureDate('2022-12-12'),
       }),
-    ).rejects.toBeInstanceOf(Error);
+    ).rejects.toBeInstanceOf(AppointmentWithOverlappingDates);
   });
 });

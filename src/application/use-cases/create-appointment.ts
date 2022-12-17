@@ -1,6 +1,7 @@
 import { inject, injectable } from 'tsyringe';
 import { Appointment } from '@application/entities/appointment';
 import { AppointmentsRepository } from '@application/repositories/appointments-repository';
+import { AppointmentWithOverlappingDates } from './errors/appointment-with-overlapping-dates';
 
 interface CreateAppointmentRequest {
   customer: string;
@@ -29,7 +30,7 @@ export class CreateAppointment {
       );
 
     if (overlappingAppointment) {
-      throw new Error('Another appointment overlaps this appointment dates.');
+      throw new AppointmentWithOverlappingDates();
     }
 
     const appointment = new Appointment({ customer, startsAt, endsAt });
