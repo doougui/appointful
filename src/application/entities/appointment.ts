@@ -1,26 +1,18 @@
-import { Replace } from '@helpers/Replace';
-import { randomUUID } from 'crypto';
+import { BaseEntity, InputBaseProps } from './base-entity';
+import { Dentist } from './dentist';
+import { Patient } from './patient';
 
 export interface AppointmentProps {
-  customer: string;
+  patient: Patient;
+  dentist: Dentist;
   startsAt: Date;
   endsAt: Date;
+  canceledAt?: Date | null;
 }
 
-export class Appointment {
-  private _id: string;
-  private props: AppointmentProps;
-
-  constructor(
-    props: Replace<AppointmentProps, { createdAt?: Date }>,
-    id?: string,
-  ) {
+export class Appointment extends BaseEntity<AppointmentProps> {
+  constructor(props: AppointmentProps & InputBaseProps, id?: string) {
     const { startsAt, endsAt } = props;
-
-    /**
-     * id with _ so it doesn't conflict with getter name (id)
-     */
-    this._id = id ?? randomUUID();
 
     if (startsAt <= new Date()) {
       throw new Error('Invalid start date');
@@ -30,19 +22,27 @@ export class Appointment {
       throw new Error('Invalid end date');
     }
 
-    this.props = props;
+    super(props, id);
   }
 
-  public get id() {
-    return this._id;
+  public get patient() {
+    return this.props.patient;
   }
 
-  public get customer() {
-    return this.props.customer;
+  public set patient(patient: Patient) {
+    this.props.patient = patient;
   }
 
-  public set customer(customer: string) {
-    this.props.customer = customer;
+  public get dentist() {
+    return this.props.dentist;
+  }
+
+  public set dentist(dentist: Dentist) {
+    this.props.dentist = dentist;
+  }
+
+  public get canceledAt(): Date | null | undefined {
+    return this.props.canceledAt;
   }
 
   public get startsAt() {
@@ -59,5 +59,9 @@ export class Appointment {
 
   public set endsAt(endsAt: Date) {
     this.props.endsAt = endsAt;
+  }
+
+  public cancel() {
+    this.props.canceledAt = new Date();
   }
 }
