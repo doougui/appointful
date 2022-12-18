@@ -26,18 +26,6 @@ yarn dev
 yarn test
 ```
 
-## Author
-
-👤 **Douglas Pinheiro Goulart**
-
-* Website: https://www.douglasgoulart.com/
-* Github: [@doougui](https://github.com/doougui)
-* LinkedIn: [@douglaspigoulart](https://linkedin.com/in/douglaspigoulart)
-
-## 🤝 Contributing
-
-Contributions, issues and feature requests are welcome!<br />Feel free to check [issues page](https://github.com/doougui/dentists-api/issues).
-
 ## TO-DO
 
 - [ ] Throw overlapping dates error only when trying to schedule an appointment with the same dentist
@@ -51,6 +39,18 @@ Contributions, issues and feature requests are welcome!<br />Feel free to check 
 - [ ] Login as patient
 - [ ] List patient's appointments
 - [ ] Set available hours for each dentist
+
+## Author
+
+👤 **Douglas Pinheiro Goulart**
+
+* Website: https://www.douglasgoulart.com/
+* Github: [@doougui](https://github.com/doougui)
+* LinkedIn: [@douglaspigoulart](https://linkedin.com/in/douglaspigoulart)
+
+## 🤝 Contributing
+
+Contributions, issues and feature requests are welcome!<br />Feel free to check [issues page](https://github.com/doougui/dentists-api/issues).
 
 ## Show your support
 
