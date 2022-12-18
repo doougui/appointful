@@ -1,4 +1,4 @@
-import { BaseEntity, InputBaseProps } from './base-entity';
+import { BaseEntity, EntityInput, Id } from './base-entity';
 import { Dentist } from './dentist';
 import { Patient } from './patient';
 
@@ -11,7 +11,7 @@ export interface AppointmentProps {
 }
 
 export class Appointment extends BaseEntity<AppointmentProps> {
-  constructor(props: AppointmentProps & InputBaseProps, id?: string) {
+  constructor(props: EntityInput<AppointmentProps>, id?: Id) {
     const { startsAt, endsAt } = props;
 
     if (startsAt <= new Date()) {

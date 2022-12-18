@@ -5,13 +5,14 @@ export interface BaseProps {
   updatedAt: Date;
 }
 
-export type InputBaseProps = { createdAt?: Date; updatedAt?: Date };
+export type EntityInput<T> = T & { createdAt?: Date; updatedAt?: Date };
+export type Id = string;
 
 export class BaseEntity<PropTypes> {
   private readonly _id: string;
   protected props: PropTypes & BaseProps;
 
-  constructor(props: PropTypes & InputBaseProps, id?: string) {
+  constructor(props: EntityInput<PropTypes>, id?: Id) {
     this._id = id ?? uuidv4();
     this.props = {
       ...props,
