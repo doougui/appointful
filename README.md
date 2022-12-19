@@ -33,13 +33,14 @@ yarn test
 - [x] Rename create appointment use case to schedule appointment
 - [x] Create email value object with email validation
 - [x] Throw overlapping dates error only when trying to schedule an appointment with the same dentist
+- [x] Add husky and lint-staged to check if everything is fine before commiting
 - [ ] List patient's appointments
 - [ ] Allow to list appointments from a specific dentist
-- [ ] Create payload data validation
 - [ ] Login as dentist
 - [ ] Login as patient
-- [ ] Set available hours for each dentist
+- [ ] Create payload data validation
 - [ ] Create http routes
+- [ ] Set available hours for each dentist
 
 ## Author
 
