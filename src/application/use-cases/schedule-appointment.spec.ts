@@ -1,9 +1,11 @@
 import { describe, expect, it } from 'vitest';
-import { CreateAppointment } from './create-appointment';
+import { CreateAppointment } from './schedule-appointment';
 import { Appointment } from '@application/entities/appointment';
 import { getFutureDate } from '@tests/utils/get-future-date';
 import { InMemoryAppointmentsRepository } from '@tests/repositories/in-memory-appointments-repository';
 import { AppointmentWithOverlappingDates } from './errors/appointment-with-overlapping-dates';
+import { makePatient } from '@tests/factories/patient-factory';
+import { makeDentist } from '@tests/factories/dentist-factory';
 
 describe('CreateAppointment', () => {
   it('should be able to create an appointment', async () => {
@@ -15,7 +17,8 @@ describe('CreateAppointment', () => {
 
     await expect(
       createAppointment.execute({
-        customer: 'John Doe',
+        patient: makePatient(),
+        dentist: makeDentist(),
         startsAt,
         endsAt,
       }),
@@ -32,14 +35,16 @@ describe('CreateAppointment', () => {
     const createAppointment = new CreateAppointment(appointmentsRepository);
 
     await createAppointment.execute({
-      customer: 'John Doe',
+      patient: makePatient(),
+      dentist: makeDentist(),
       startsAt,
       endsAt,
     });
 
     await expect(
       createAppointment.execute({
-        customer: 'John Doe',
+        patient: makePatient(),
+        dentist: makeDentist(),
         startsAt: getFutureDate(`${date} 11:00`),
         endsAt: getFutureDate(`${date} 15:00`),
       }),
@@ -47,7 +52,8 @@ describe('CreateAppointment', () => {
 
     await expect(
       createAppointment.execute({
-        customer: 'John Doe',
+        patient: makePatient(),
+        dentist: makeDentist(),
         startsAt: getFutureDate(`${date} 08:00`),
         endsAt: getFutureDate(`${date} 14:00`),
       }),
@@ -55,7 +61,8 @@ describe('CreateAppointment', () => {
 
     await expect(
       createAppointment.execute({
-        customer: 'John Doe',
+        patient: makePatient(),
+        dentist: makeDentist(),
         startsAt: getFutureDate(`${date} 08:00`),
         endsAt: getFutureDate(`${date} 15:00`),
       }),
@@ -63,7 +70,8 @@ describe('CreateAppointment', () => {
 
     await expect(
       createAppointment.execute({
-        customer: 'John Doe',
+        patient: makePatient(),
+        dentist: makeDentist(),
         startsAt: getFutureDate(`${date} 09:30`),
         endsAt: getFutureDate(`${date} 11:30`),
       }),
