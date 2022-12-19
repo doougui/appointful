@@ -5,7 +5,7 @@ import { AppointmentWithOverlappingDates } from './errors/appointment-with-overl
 import { Patient } from '@application/entities/patient';
 import { Dentist } from '@application/entities/dentist';
 
-interface CreateAppointmentRequest {
+interface ScheduleAppointmentRequest {
   patient: Patient;
   dentist: Dentist;
   startsAt: Date;
@@ -13,10 +13,10 @@ interface CreateAppointmentRequest {
   canceledAt?: Date | null;
 }
 
-type CreateAppointmentResponse = Appointment;
+type ScheduleAppointmentResponse = Appointment;
 
 @injectable()
-export class CreateAppointment {
+export class ScheduleAppointment {
   constructor(
     @inject('AppointmentsRepository')
     private appointmentsRepository: AppointmentsRepository,
@@ -28,7 +28,7 @@ export class CreateAppointment {
     startsAt,
     endsAt,
     canceledAt,
-  }: CreateAppointmentRequest): Promise<CreateAppointmentResponse> {
+  }: ScheduleAppointmentRequest): Promise<ScheduleAppointmentResponse> {
     const overlappingAppointment =
       await this.appointmentsRepository.findOverlappingAppointment(
         startsAt,

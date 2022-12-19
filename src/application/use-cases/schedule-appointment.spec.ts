@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { CreateAppointment } from './schedule-appointment';
+import { ScheduleAppointment } from './schedule-appointment';
 import { Appointment } from '@application/entities/appointment';
 import { getFutureDate } from '@tests/utils/get-future-date';
 import { InMemoryAppointmentsRepository } from '@tests/repositories/in-memory-appointments-repository';
@@ -7,13 +7,13 @@ import { AppointmentWithOverlappingDates } from './errors/appointment-with-overl
 import { makePatient } from '@tests/factories/patient-factory';
 import { makeDentist } from '@tests/factories/dentist-factory';
 
-describe('CreateAppointment', () => {
-  it('should be able to create an appointment', async () => {
+describe('ScheduleAppointment', () => {
+  it('should be able to schedule an appointment', async () => {
     const startsAt = getFutureDate('2022-12-10');
     const endsAt = getFutureDate('2022-12-11');
 
     const appointmentsRepository = new InMemoryAppointmentsRepository();
-    const createAppointment = new CreateAppointment(appointmentsRepository);
+    const createAppointment = new ScheduleAppointment(appointmentsRepository);
 
     await expect(
       createAppointment.execute({
@@ -25,14 +25,14 @@ describe('CreateAppointment', () => {
     ).resolves.toBeInstanceOf(Appointment);
   });
 
-  it('should not be able to create an appointment with overlapping dates', async () => {
+  it('should not be able to schedule an appointment with overlapping dates', async () => {
     const date = '2022-12-10';
 
     const startsAt = getFutureDate(`${date} 09:00`);
     const endsAt = getFutureDate(`${date} 12:00`);
 
     const appointmentsRepository = new InMemoryAppointmentsRepository();
-    const createAppointment = new CreateAppointment(appointmentsRepository);
+    const createAppointment = new ScheduleAppointment(appointmentsRepository);
 
     await createAppointment.execute({
       patient: makePatient(),
