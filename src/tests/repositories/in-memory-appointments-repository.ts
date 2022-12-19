@@ -18,8 +18,10 @@ export class InMemoryAppointmentsRepository implements AppointmentsRepository {
     return appointment;
   }
 
-  async create(appointment: Appointment): Promise<void> {
-    this.appointments.push(appointment);
+  async findManyByPatientId(patientId: string) {
+    return this.appointments.filter(
+      (appointment) => appointment.patient.id === patientId,
+    );
   }
 
   async findOverlappingAppointment(
@@ -42,6 +44,10 @@ export class InMemoryAppointmentsRepository implements AppointmentsRepository {
     }
 
     return overlappingAppointment;
+  }
+
+  async create(appointment: Appointment): Promise<void> {
+    this.appointments.push(appointment);
   }
 
   async save(appointment: Appointment) {

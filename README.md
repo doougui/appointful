@@ -34,7 +34,7 @@ yarn test
 - [x] Create email value object with email validation
 - [x] Throw overlapping dates error only when trying to schedule an appointment with the same dentist
 - [x] Add husky and lint-staged to check if everything is fine before commiting
-- [ ] List patient's appointments
+- [x] List patient's appointments
 - [ ] Allow to list appointments from a specific dentist
 - [ ] Login as dentist
 - [ ] Login as patient
