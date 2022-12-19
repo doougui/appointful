@@ -35,7 +35,7 @@ yarn test
 - [x] Throw overlapping dates error only when trying to schedule an appointment with the same dentist
 - [x] Add husky and lint-staged to check if everything is fine before commiting
 - [x] List patient's appointments
-- [ ] Allow to list appointments from a specific dentist
+- [x] Allow to list appointments from a specific dentist
 - [ ] Login as dentist
 - [ ] Login as patient
 - [ ] Create payload data validation

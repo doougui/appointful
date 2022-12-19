@@ -24,6 +24,12 @@ export class InMemoryAppointmentsRepository implements AppointmentsRepository {
     );
   }
 
+  async findManyByDentistId(dentistId: string) {
+    return this.appointments.filter(
+      (appointment) => appointment.dentist.id === dentistId,
+    );
+  }
+
   async findOverlappingAppointment(
     startsAt: Date,
     endsAt: Date,

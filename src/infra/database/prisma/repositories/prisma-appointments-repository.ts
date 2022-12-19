@@ -9,6 +9,10 @@ export class PrismaAppointmentsRepository implements AppointmentsRepository {
     return [];
   }
 
+  async findManyByDentistId() {
+    return [];
+  }
+
   async findOverlappingAppointment() {
     return null;
   }
