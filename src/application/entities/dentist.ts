@@ -1,9 +1,10 @@
 import { BaseEntity, EntityInput, Id } from './base-entity';
+import { Email } from './value-objects/email';
 import { Password } from './value-objects/password';
 
 export interface DentistProps {
   name: string;
-  email: string;
+  email: Email;
   password: Password;
 }
 
@@ -24,7 +25,7 @@ export class Dentist extends BaseEntity<DentistProps> {
     return this.props.email;
   }
 
-  public set email(email: string) {
+  public set email(email: Email) {
     this.props.email = email;
   }
 

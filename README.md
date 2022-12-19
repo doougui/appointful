@@ -28,13 +28,13 @@ yarn test
 
 ## TO-DO
 
+- [x] Allow to cancel an appointment
+- [x] Allow to schedule an appointment
+- [x] Rename create appointment use case to schedule appointment
 - [ ] Throw overlapping dates error only when trying to schedule an appointment with the same dentist
 - [ ] Create email value object with email validation
 - [ ] Create payload data validation
 - [ ] Allow to list appointments from a specific dentist
-- [x] Allow to cancel an appointment
-- [x] Allow to schedule an appointment
-- [x] Rename create appointment use case to schedule appointment
 - [ ] Login as dentist
 - [ ] Login as patient
 - [ ] List patient's appointments

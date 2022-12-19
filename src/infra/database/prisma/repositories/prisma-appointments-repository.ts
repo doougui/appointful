@@ -1,12 +1,19 @@
 import { AppointmentsRepository } from '@application/repositories/appointments-repository';
 
 export class PrismaAppointmentsRepository implements AppointmentsRepository {
-  async create() {
-    throw new Error('Method not implemented.');
+  async findById() {
+    return null;
   }
 
   async findOverlappingAppointment() {
-    throw new Error('Method not implemented.');
     return null;
+  }
+
+  async save() {
+    throw new Error('Method not implemented.');
+  }
+
+  async create() {
+    throw new Error('Method not implemented.');
   }
 }
