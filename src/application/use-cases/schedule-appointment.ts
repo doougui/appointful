@@ -33,6 +33,7 @@ export class ScheduleAppointment {
       await this.appointmentsRepository.findOverlappingAppointment(
         startsAt,
         endsAt,
+        dentist,
       );
 
     if (overlappingAppointment) {

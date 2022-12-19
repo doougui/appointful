@@ -1,6 +1,7 @@
 import { areIntervalsOverlapping } from 'date-fns';
 import { Appointment } from '@application/entities/appointment';
 import { AppointmentsRepository } from '@application/repositories/appointments-repository';
+import { Dentist } from '@application/entities/dentist';
 
 export class InMemoryAppointmentsRepository implements AppointmentsRepository {
   public appointments: Appointment[] = [];
@@ -24,14 +25,17 @@ export class InMemoryAppointmentsRepository implements AppointmentsRepository {
   async findOverlappingAppointment(
     startsAt: Date,
     endsAt: Date,
+    dentist: Dentist,
   ): Promise<Appointment | null> {
-    const overlappingAppointment = this.appointments.find((appointment) => {
-      return areIntervalsOverlapping(
-        { start: startsAt, end: endsAt },
-        { start: appointment.startsAt, end: appointment.endsAt },
-        { inclusive: true },
-      );
-    });
+    const overlappingAppointment = this.appointments
+      .filter((appointment) => appointment.dentist.id === dentist.id)
+      .find((appointment) => {
+        return areIntervalsOverlapping(
+          { start: startsAt, end: endsAt },
+          { start: appointment.startsAt, end: appointment.endsAt },
+          { inclusive: true },
+        );
+      });
 
     if (!overlappingAppointment) {
       return null;

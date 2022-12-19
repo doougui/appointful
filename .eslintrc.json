@@ -17,6 +17,7 @@
     "project": "./tsconfig.json"
   },
   "rules": {
-    "no-useless-constructor": "off"
+    "no-useless-constructor": "off",
+    "no-console": ["warn", { "allow": ["warn", "error", "info"] }]
   }
 }

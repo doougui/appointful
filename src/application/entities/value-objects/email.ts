@@ -15,7 +15,6 @@ export class Email {
   constructor(email: string) {
     const isEmailValid = this.validateEmail(email);
 
-    console.log(email, isEmailValid);
     if (!isEmailValid) {
       throw new InvalidEmailError();
     }
