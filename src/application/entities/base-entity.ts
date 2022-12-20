@@ -9,7 +9,7 @@ export type EntityInput<T> = T & { createdAt?: Date; updatedAt?: Date };
 export type Id = string;
 
 export class BaseEntity<PropTypes> {
-  private readonly _id: string;
+  private readonly _id: Id;
   protected props: PropTypes & BaseProps;
 
   constructor(props: EntityInput<PropTypes>, id?: Id) {

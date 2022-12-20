@@ -1,9 +1,8 @@
-import { inject, injectable } from 'tsyringe';
 import { Appointment } from '@application/entities/appointment';
+import { Dentist } from '@application/entities/dentist';
+import { Patient } from '@application/entities/patient';
 import { AppointmentsRepository } from '@application/repositories/appointments-repository';
 import { AppointmentWithOverlappingDates } from './errors/appointment-with-overlapping-dates';
-import { Patient } from '@application/entities/patient';
-import { Dentist } from '@application/entities/dentist';
 
 interface ScheduleAppointmentRequest {
   patient: Patient;
@@ -13,14 +12,12 @@ interface ScheduleAppointmentRequest {
   canceledAt?: Date | null;
 }
 
-type ScheduleAppointmentResponse = Appointment;
+type ScheduleAppointmentResponse = {
+  appointment: Appointment;
+};
 
-@injectable()
 export class ScheduleAppointment {
-  constructor(
-    @inject('AppointmentsRepository')
-    private appointmentsRepository: AppointmentsRepository,
-  ) {}
+  constructor(private appointmentsRepository: AppointmentsRepository) {}
 
   async execute({
     patient,
@@ -50,6 +47,6 @@ export class ScheduleAppointment {
 
     await this.appointmentsRepository.create(appointment);
 
-    return appointment;
+    return { appointment };
   }
 }

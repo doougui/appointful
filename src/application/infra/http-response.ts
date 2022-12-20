@@ -1,9 +1,9 @@
-export type HttpResponse = {
+export type HttpResponse<T = undefined> = {
   statusCode: number;
-  body: unknown;
+  body: T | undefined | { error: string };
 };
 
-export function ok<T>(dto?: T): HttpResponse {
+export function ok<T>(dto?: T): HttpResponse<T> {
   return {
     statusCode: 200,
     body: dto,

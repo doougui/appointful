@@ -1,11 +1,12 @@
+import { adaptRoute } from '@application/infra/adapters/express-route-adapter';
 import { Router } from 'express';
-import { container } from 'tsyringe';
-import { AppointmentsController } from '@infra/http/controllers/appointments-controller';
+import { makeScheduleAppointmentsController } from '../factories/controllers/schedule-appointments-controller-factory';
 
 const appointmentsRoutes = Router();
 
-const appointmentsController = container.resolve(AppointmentsController);
-
-appointmentsRoutes.get('/', appointmentsController.index);
+appointmentsRoutes.post(
+  '/schedule',
+  adaptRoute(makeScheduleAppointmentsController()),
+);
 
 export { appointmentsRoutes };
