@@ -1,31 +1,45 @@
 import { Appointment } from '@application/entities/appointment';
-import { Dentist } from '@application/entities/dentist';
-import { Patient } from '@application/entities/patient';
 import { AppointmentsRepository } from '@application/repositories/appointments-repository';
+import { DentistsRepository } from '@application/repositories/dentists-repository';
+import { PatientsRepository } from '@application/repositories/patients-repository';
 import { AppointmentWithOverlappingDates } from './errors/appointment-with-overlapping-dates';
+import { InvalidDentistError } from './errors/invalid-dentist';
+import { InvalidPatientError } from './errors/invalid-patient';
 
 interface ScheduleAppointmentRequest {
-  patient: Patient;
-  dentist: Dentist;
+  patientId: string;
+  dentistId: string;
   startsAt: Date;
   endsAt: Date;
-  canceledAt?: Date | null;
 }
 
-type ScheduleAppointmentResponse = {
-  appointment: Appointment;
-};
+type ScheduleAppointmentResponse = { appointment: Appointment };
 
 export class ScheduleAppointment {
-  constructor(private appointmentsRepository: AppointmentsRepository) {}
+  constructor(
+    private appointmentsRepository: AppointmentsRepository,
+    private patientsRepository: PatientsRepository,
+    private dentistsRepository: DentistsRepository,
+  ) {}
 
   async execute({
-    patient,
-    dentist,
+    patientId,
+    dentistId,
     startsAt,
     endsAt,
-    canceledAt,
   }: ScheduleAppointmentRequest): Promise<ScheduleAppointmentResponse> {
+    const patient = await this.patientsRepository.findById(patientId);
+
+    if (!patient) {
+      throw new InvalidPatientError();
+    }
+
+    const dentist = await this.dentistsRepository.findById(dentistId);
+
+    if (!dentist) {
+      throw new InvalidDentistError();
+    }
+
     const overlappingAppointment =
       await this.appointmentsRepository.findOverlappingAppointment(
         startsAt,
@@ -42,7 +56,6 @@ export class ScheduleAppointment {
       dentist,
       startsAt,
       endsAt,
-      canceledAt,
     });
 
     await this.appointmentsRepository.create(appointment);

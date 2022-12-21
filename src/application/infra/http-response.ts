@@ -71,13 +71,13 @@ export function tooMany(error: Error): HttpResponse {
   };
 }
 
-export function fail(error: Error) {
+export function fail(error: unknown) {
   console.error(error);
 
   return {
     statusCode: 500,
     body: {
-      error: error.message,
+      error: 'An unexpected error has occurred.',
     },
   };
 }

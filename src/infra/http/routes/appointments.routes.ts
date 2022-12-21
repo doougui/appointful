@@ -1,6 +1,6 @@
 import { adaptRoute } from '@application/infra/adapters/express-route-adapter';
 import { Router } from 'express';
-import { makeScheduleAppointmentsController } from '../factories/controllers/schedule-appointments-controller-factory';
+import { makeScheduleAppointmentsController } from '../factories/controllers/appointments/schedule-appointments-controller-factory';
 
 const appointmentsRoutes = Router();
 
