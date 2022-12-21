@@ -1,6 +1,6 @@
-import { InvalidParamError } from '@infra/http/errors/invalid-param';
+import { RequestError } from '@infra/http/errors/request-error';
 
-export class AppointmentWithOverlappingDates extends InvalidParamError {
+export class AppointmentWithOverlappingDates extends RequestError {
   constructor() {
     super('Another appointment overlaps this appointment dates.');
   }

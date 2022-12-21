@@ -3,7 +3,7 @@ export type HttpResponse<T = undefined> = {
   body: T | undefined | { error: string };
 };
 
-export function ok<T>(dto?: T): HttpResponse<T> {
+export function ok<T = undefined>(dto?: T): HttpResponse<T> {
   return {
     statusCode: 200,
     body: dto,

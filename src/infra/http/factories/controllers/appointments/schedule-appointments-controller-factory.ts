@@ -17,9 +17,9 @@ export function makeScheduleAppointmentsController(): Controller<ScheduleAppoint
     prismaPatientsRepository,
     prismaDentistsRepository,
   );
-  const appointmentsController = new ScheduleAppointmentController(
+  const scheduleAppointmentsController = new ScheduleAppointmentController(
     appointmentsUseCase,
   );
 
-  return appointmentsController;
+  return scheduleAppointmentsController;
 }

@@ -1,7 +1,8 @@
 import { Controller } from '@application/infra/controller';
-import { clientError, created, fail } from '@application/infra/http-response';
+import { created } from '@application/infra/http-response';
+import { InvalidDentistError } from '@application/use-cases/appointments/errors/invalid-dentist';
+import { InvalidPatientError } from '@application/use-cases/appointments/errors/invalid-patient';
 import { ScheduleAppointment } from '@application/use-cases/appointments/schedule-appointment';
-import { InvalidParamError } from '@infra/http/errors/invalid-param';
 import { isValidDate } from '@utils/is-valid-date';
 import { parseISO } from 'date-fns';
 import { InvalidDatesError } from './errors/invalid-dates';
@@ -18,16 +19,6 @@ export class ScheduleAppointmentController
 {
   constructor(private scheduleAppointmentUseCase: ScheduleAppointment) {}
 
-  private async handleErrors(e: unknown) {
-    if (!(e instanceof Error)) return fail(e);
-
-    if (e instanceof InvalidParamError) {
-      return clientError(e);
-    }
-
-    return fail(e);
-  }
-
   async handle(request: ScheduleAppointmentControllerRequest) {
     const {
       dentistId,
@@ -39,20 +30,19 @@ export class ScheduleAppointmentController
     const startsAt = parseISO(rawStartsAt);
     const endsAt = parseISO(rawEndsAt);
 
+    if (!patientId) throw new InvalidPatientError();
+    if (!dentistId) throw new InvalidDentistError();
+
     if (!isValidDate(startsAt) || !isValidDate(endsAt)) {
-      return clientError(new InvalidDatesError());
+      throw new InvalidDatesError();
     }
 
-    try {
-      await this.scheduleAppointmentUseCase.execute({
-        dentistId,
-        patientId,
-        startsAt,
-        endsAt,
-      });
-    } catch (e) {
-      return this.handleErrors(e);
-    }
+    await this.scheduleAppointmentUseCase.execute({
+      dentistId,
+      patientId,
+      startsAt,
+      endsAt,
+    });
 
     return created();
   }
