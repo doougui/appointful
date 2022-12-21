@@ -14,21 +14,23 @@ model Patient {
   id          String        @id
   name        String
   email       String        @unique
-  password    String
   phone       String
   createdAt   DateTime      @default(now())
   updatedAt   DateTime      @default(now())
   appointment Appointment[]
+
+  @@map("patients")
 }
 
 model Dentist {
   id          String        @id
   name        String
   email       String        @unique
-  password    String
   createdAt   DateTime      @default(now())
   updatedAt   DateTime      @default(now())
   Appointment Appointment[]
+
+  @@map("dentists")
 }
 
 model Appointment {
@@ -42,4 +44,6 @@ model Appointment {
   updatedAt  DateTime  @default(now())
   patientId  String
   dentistId  String
+
+  @@map("appointments")
 }
