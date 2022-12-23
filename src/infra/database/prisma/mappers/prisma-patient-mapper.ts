@@ -9,7 +9,6 @@ export class PrismaPatientMapper {
       email: new Email(patient.email),
       phone: patient.phone,
       createdAt: patient.createdAt,
-      updatedAt: patient.updatedAt,
     });
   }
 }

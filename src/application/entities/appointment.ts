@@ -1,10 +1,9 @@
+import { RequestError } from '@infra/http/errors/request-error';
 import { BaseEntity, EntityInput, Id } from './base-entity';
-import { Dentist } from './dentist';
-import { Patient } from './patient';
 
 export interface AppointmentProps {
-  patient: Patient;
-  dentist: Dentist;
+  patientId: string;
+  dentistId: string;
   startsAt: Date;
   endsAt: Date;
   canceledAt?: Date | null;
@@ -15,30 +14,32 @@ export class Appointment extends BaseEntity<AppointmentProps> {
     const { startsAt, endsAt } = props;
 
     if (startsAt <= new Date()) {
-      throw new Error('Invalid start date');
+      throw new RequestError(
+        'Start date must be greater than the current date.',
+      );
     }
 
     if (endsAt <= startsAt) {
-      throw new Error('Invalid end date');
+      throw new RequestError('End date must be greater than the start date.');
     }
 
     super(props, id);
   }
 
-  public get patient() {
-    return this.props.patient;
+  public get patientId() {
+    return this.props.patientId;
   }
 
-  public set patient(patient: Patient) {
-    this.props.patient = patient;
+  public set patientId(patient: string) {
+    this.props.patientId = patient;
   }
 
-  public get dentist() {
-    return this.props.dentist;
+  public get dentistId() {
+    return this.props.dentistId;
   }
 
-  public set dentist(dentist: Dentist) {
-    this.props.dentist = dentist;
+  public set dentistId(dentistId: string) {
+    this.props.dentistId = dentistId;
   }
 
   public get canceledAt(): Date | null | undefined {

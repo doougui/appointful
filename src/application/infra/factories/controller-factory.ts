@@ -2,8 +2,8 @@ import { RequestError } from '@infra/http/errors/request-error';
 import { Controller } from '../controller';
 import { clientError, fail } from '../http-response';
 
-export async function makeController<T>(
-  controller: Controller<T>,
+export async function makeController<T, R>(
+  controller: Controller<T, R>,
   requestData: T,
 ) {
   try {

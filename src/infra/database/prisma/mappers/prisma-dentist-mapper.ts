@@ -8,7 +8,6 @@ export class PrismaDentistMapper {
       name: dentist.name,
       email: new Email(dentist.email),
       createdAt: dentist.createdAt,
-      updatedAt: dentist.updatedAt,
     });
   }
 }

@@ -52,8 +52,8 @@ export class ScheduleAppointment {
     }
 
     const appointment = new Appointment({
-      patient,
-      dentist,
+      patientId,
+      dentistId,
       startsAt,
       endsAt,
     });

@@ -3,6 +3,7 @@ import { created } from '@application/infra/http-response';
 import { InvalidDentistError } from '@application/use-cases/appointments/errors/invalid-dentist';
 import { InvalidPatientError } from '@application/use-cases/appointments/errors/invalid-patient';
 import { ScheduleAppointment } from '@application/use-cases/appointments/schedule-appointment';
+import { Appointment } from '@application/entities/appointment';
 import { isValidDate } from '@utils/is-valid-date';
 import { parseISO } from 'date-fns';
 import { InvalidDatesError } from './errors/invalid-dates';
@@ -15,7 +16,7 @@ export type ScheduleAppointmentControllerRequest = {
 };
 
 export class ScheduleAppointmentController
-  implements Controller<ScheduleAppointmentControllerRequest>
+  implements Controller<ScheduleAppointmentControllerRequest, Appointment>
 {
   constructor(private scheduleAppointmentUseCase: ScheduleAppointment) {}
 
@@ -37,13 +38,13 @@ export class ScheduleAppointmentController
       throw new InvalidDatesError();
     }
 
-    await this.scheduleAppointmentUseCase.execute({
+    const { appointment } = await this.scheduleAppointmentUseCase.execute({
       dentistId,
       patientId,
       startsAt,
       endsAt,
     });
 
-    return created();
+    return created(appointment);
   }
 }

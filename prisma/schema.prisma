@@ -16,7 +16,6 @@ model Patient {
   email       String        @unique
   phone       String
   createdAt   DateTime      @default(now())
-  updatedAt   DateTime      @default(now())
   appointment Appointment[]
 
   @@map("patients")
@@ -27,7 +26,6 @@ model Dentist {
   name        String
   email       String        @unique
   createdAt   DateTime      @default(now())
-  updatedAt   DateTime      @default(now())
   Appointment Appointment[]
 
   @@map("dentists")
@@ -41,7 +39,6 @@ model Appointment {
   endsAt     DateTime
   canceledAt DateTime?
   createdAt  DateTime  @default(now())
-  updatedAt  DateTime  @default(now())
   patientId  String
   dentistId  String
 

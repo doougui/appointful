@@ -13,12 +13,18 @@ describe('GetDentistAppointments', () => {
 
     const dentist = makeDentist({}, 'dentist-1');
 
-    await appointmentsRepository.create(makeAppointment({ dentist }));
-    await appointmentsRepository.create(makeAppointment({ dentist }));
-    await appointmentsRepository.create(makeAppointment({ dentist }));
+    await appointmentsRepository.create(
+      makeAppointment({ dentistId: dentist.id }),
+    );
+    await appointmentsRepository.create(
+      makeAppointment({ dentistId: dentist.id }),
+    );
+    await appointmentsRepository.create(
+      makeAppointment({ dentistId: dentist.id }),
+    );
 
     await appointmentsRepository.create(
-      makeAppointment({ dentist: makeDentist() }),
+      makeAppointment({ dentistId: makeDentist().id }),
     );
 
     const { appointments } = await getDentistAppointments.execute({
@@ -29,9 +35,7 @@ describe('GetDentistAppointments', () => {
     expect(appointments).toEqual(
       expect.arrayContaining([
         expect.objectContaining({
-          dentist: expect.objectContaining({
-            _id: 'dentist-1',
-          }),
+          dentistId: 'dentist-1',
         }),
       ]),
     );

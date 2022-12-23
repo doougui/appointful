@@ -12,8 +12,8 @@ type Override = Partial<AppointmentProps>;
 export function makeAppointment(override: Override = {}, id?: Id) {
   return new Appointment(
     {
-      dentist: makeDentist(),
-      patient: makePatient(),
+      dentistId: makeDentist().id,
+      patientId: makePatient().id,
       startsAt: getFutureDate('2022-12-10 13:00'),
       endsAt: getFutureDate('2022-12-10 16:00'),
       ...override,

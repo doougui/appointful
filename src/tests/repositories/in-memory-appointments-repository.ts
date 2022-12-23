@@ -20,13 +20,13 @@ export class InMemoryAppointmentsRepository implements AppointmentsRepository {
 
   async findManyByPatientId(patientId: string) {
     return this.appointments.filter(
-      (appointment) => appointment.patient.id === patientId,
+      (appointment) => appointment.patientId === patientId,
     );
   }
 
   async findManyByDentistId(dentistId: string) {
     return this.appointments.filter(
-      (appointment) => appointment.dentist.id === dentistId,
+      (appointment) => appointment.dentistId === dentistId,
     );
   }
 
@@ -36,7 +36,7 @@ export class InMemoryAppointmentsRepository implements AppointmentsRepository {
     dentist: Dentist,
   ): Promise<Appointment | null> {
     const overlappingAppointment = this.appointments
-      .filter((appointment) => appointment.dentist.id === dentist.id)
+      .filter((appointment) => appointment.dentistId === dentist.id)
       .find((appointment) => {
         return areIntervalsOverlapping(
           { start: startsAt, end: endsAt },

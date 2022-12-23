@@ -9,7 +9,6 @@ describe('BaseEntity', () => {
     expect(baseEntity).toBeInstanceOf(BaseEntity);
     expect(validate(baseEntity.id)).toBe(true);
     expect(baseEntity.createdAt).toEqual(expect.any(Date));
-    expect(baseEntity.updatedAt).toEqual(expect.any(Date));
   });
 
   it('should create a base entity with existing data', () => {
@@ -18,7 +17,6 @@ describe('BaseEntity', () => {
     const baseEntity = new BaseEntity(
       {
         createdAt: date,
-        updatedAt: date,
       },
       'example-id',
     );
@@ -26,6 +24,5 @@ describe('BaseEntity', () => {
     expect(baseEntity).toBeInstanceOf(BaseEntity);
     expect(baseEntity.id).toEqual('example-id');
     expect(baseEntity.createdAt).toEqual(date);
-    expect(baseEntity.updatedAt).toEqual(date);
   });
 });
