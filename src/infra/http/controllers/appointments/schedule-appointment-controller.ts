@@ -3,24 +3,22 @@ import { created } from '@application/infra/http-response';
 import { InvalidDentistError } from '@application/use-cases/appointments/errors/invalid-dentist';
 import { InvalidPatientError } from '@application/use-cases/appointments/errors/invalid-patient';
 import { ScheduleAppointment } from '@application/use-cases/appointments/schedule-appointment';
-import { Appointment } from '@application/entities/appointment';
+import {
+  ScheduleAppointmentInputDTO,
+  ScheduleAppointmentOutputDTO,
+} from '@infra/http/dtos/schedule-appointment-dto';
+import { AppointmentViewModel } from '@infra/http/view-models/appointment-view-model';
 import { isValidDate } from '@utils/is-valid-date';
 import { parseISO } from 'date-fns';
 import { InvalidDatesError } from './errors/invalid-dates';
 
-export type ScheduleAppointmentControllerRequest = {
-  patientId: string;
-  dentistId: string;
-  startsAt: string;
-  endsAt: string;
-};
-
 export class ScheduleAppointmentController
-  implements Controller<ScheduleAppointmentControllerRequest, Appointment>
+  implements
+    Controller<ScheduleAppointmentInputDTO, ScheduleAppointmentOutputDTO>
 {
   constructor(private scheduleAppointmentUseCase: ScheduleAppointment) {}
 
-  async handle(request: ScheduleAppointmentControllerRequest) {
+  async handle(request: ScheduleAppointmentInputDTO) {
     const {
       dentistId,
       patientId,
@@ -45,6 +43,6 @@ export class ScheduleAppointmentController
       endsAt,
     });
 
-    return created(appointment);
+    return created(AppointmentViewModel.toHTTP(appointment));
   }
 }

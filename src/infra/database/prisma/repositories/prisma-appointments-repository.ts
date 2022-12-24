@@ -38,8 +38,22 @@ export class PrismaAppointmentsRepository implements AppointmentsRepository {
     return appointments.map(PrismaAppointmentMapper.toDomain);
   }
 
-  async findOverlappingAppointment() {
+  async findOverlappingAppointment(): Promise<Appointment | null> {
     return null;
+    // const overlappingAppointment = await prisma.appointment.findFirst({
+    //   where: {
+    //     startsAt: {
+    //       gte: startsAt,
+    //     },
+    //     endsAt: {},
+    //   },
+    // });
+
+    // if (!overlappingAppointment) {
+    //   return null;
+    // }
+
+    // return PrismaAppointmentMapper.toDomain(overlappingAppointment);
   }
 
   async create(appointment: Appointment) {
