@@ -1,8 +1,17 @@
 import { Appointment } from '@application/entities/appointment';
-import { ScheduleAppointmentOutputDTO } from '../dtos/schedule-appointment-dto';
+
+export type AppointmentHttpViewModel = {
+  id: string;
+  patientId: string;
+  dentistId: string;
+  startsAt: Date;
+  endsAt: Date;
+  canceledAt: Date | null;
+  createdAt: Date;
+};
 
 export class AppointmentViewModel {
-  static toHTTP(appointment: Appointment): ScheduleAppointmentOutputDTO {
+  static toHTTP(appointment: Appointment): AppointmentHttpViewModel {
     return {
       id: appointment.id,
       patientId: appointment.patientId,

@@ -1,24 +1,27 @@
-import { Appointment } from '@application/entities/appointment';
 import { Controller } from '@application/infra/controller';
 import { ok } from '@application/infra/http-response';
 import { GetDentistAppointments } from '@application/use-cases/appointments/get-dentist-appointments';
-
-export type GetDentistAppointmentsControllerRequest = {
-  dentistId: string;
-};
+import {
+  GetDentistAppointmentsInputDTO,
+  GetDentistAppointmentsOutputDTO,
+} from '@infra/http/dtos/get-dentist-appointments-dto';
+import { AppointmentViewModel } from '@infra/http/view-models/appointment-view-model';
 
 export class GetDentistAppointmentsController
-  implements Controller<GetDentistAppointmentsControllerRequest, Appointment[]>
+  implements
+    Controller<GetDentistAppointmentsInputDTO, GetDentistAppointmentsOutputDTO>
 {
   constructor(private getDentistAppointments: GetDentistAppointments) {}
 
-  async handle(request: GetDentistAppointmentsControllerRequest) {
+  async handle(request: GetDentistAppointmentsInputDTO) {
     const { dentistId } = request;
 
     const { appointments } = await this.getDentistAppointments.execute({
       dentistId,
     });
 
-    return ok<Appointment[]>(appointments);
+    return ok<GetDentistAppointmentsOutputDTO>(
+      appointments.map(AppointmentViewModel.toHTTP),
+    );
   }
 }

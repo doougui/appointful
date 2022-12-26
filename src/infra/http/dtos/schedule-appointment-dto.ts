@@ -1,3 +1,5 @@
+import { AppointmentHttpViewModel } from '../view-models/appointment-view-model';
+
 export interface ScheduleAppointmentInputDTO {
   patientId: string;
   dentistId: string;
@@ -5,12 +7,4 @@ export interface ScheduleAppointmentInputDTO {
   endsAt: string;
 }
 
-export interface ScheduleAppointmentOutputDTO {
-  id: string;
-  patientId: string;
-  dentistId: string;
-  startsAt: Date;
-  endsAt: Date;
-  canceledAt: Date | null;
-  createdAt: Date;
-}
+export type ScheduleAppointmentOutputDTO = AppointmentHttpViewModel;

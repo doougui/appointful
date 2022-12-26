@@ -18,8 +18,8 @@ export class PrismaAppointmentMapper {
     return new AppointmentEntity({
       patientId: appointment.patientId,
       dentistId: appointment.dentistId,
-      startsAt: appointment.startsAt,
-      endsAt: appointment.endsAt,
+      startsAt: new Date(appointment.startsAt),
+      endsAt: new Date(appointment.endsAt),
       canceledAt: appointment.canceledAt,
       createdAt: appointment.createdAt,
     });
