@@ -4,7 +4,9 @@ import { DentistsRepository } from '@application/repositories/dentists-repositor
 import { PatientsRepository } from '@application/repositories/patients-repository';
 import { AppointmentWithOverlappingDates } from './errors/appointment-with-overlapping-dates';
 import { InvalidDentistError } from './errors/invalid-dentist';
+import { InvalidEndDateError } from './errors/invalid-end-date';
 import { InvalidPatientError } from './errors/invalid-patient';
+import { InvalidStartDateError } from './errors/invalid-start-date';
 
 interface ScheduleAppointmentRequest {
   patientId: string;
@@ -22,12 +24,20 @@ export class ScheduleAppointment {
     private dentistsRepository: DentistsRepository,
   ) {}
 
-  async execute({
+  private async validate({
     patientId,
     dentistId,
     startsAt,
     endsAt,
-  }: ScheduleAppointmentRequest): Promise<ScheduleAppointmentResponse> {
+  }: ScheduleAppointmentRequest) {
+    if (startsAt <= new Date()) {
+      throw new InvalidStartDateError();
+    }
+
+    if (endsAt <= startsAt) {
+      throw new InvalidEndDateError();
+    }
+
     const patient = await this.patientsRepository.findById(patientId);
 
     if (!patient) {
@@ -50,6 +60,14 @@ export class ScheduleAppointment {
     if (overlappingAppointment) {
       throw new AppointmentWithOverlappingDates();
     }
+  }
+
+  async execute(
+    request: ScheduleAppointmentRequest,
+  ): Promise<ScheduleAppointmentResponse> {
+    const { patientId, dentistId, startsAt, endsAt } = request;
+
+    await this.validate({ patientId, dentistId, startsAt, endsAt });
 
     const appointment = new Appointment({
       patientId,

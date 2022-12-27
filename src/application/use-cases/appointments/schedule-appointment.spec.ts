@@ -11,7 +11,9 @@ import { getFutureDate } from '@tests/utils/get-future-date';
 import { beforeEach, describe, expect, it } from 'vitest';
 import { AppointmentWithOverlappingDates } from './errors/appointment-with-overlapping-dates';
 import { InvalidDentistError } from './errors/invalid-dentist';
+import { InvalidEndDateError } from './errors/invalid-end-date';
 import { InvalidPatientError } from './errors/invalid-patient';
+import { InvalidStartDateError } from './errors/invalid-start-date';
 import { ScheduleAppointment } from './schedule-appointment';
 
 let appointmentsRepository: AppointmentsRepository;
@@ -50,6 +52,49 @@ describe('ScheduleAppointment', () => {
     });
 
     expect(appointment).toBeInstanceOf(Appointment);
+  });
+
+  it('should not be able to schedule an appointment with start date before now', async () => {
+    const startsAt = new Date();
+    const endsAt = new Date();
+
+    startsAt.setDate(startsAt.getDate() - 1);
+    endsAt.setDate(endsAt.getDate() + 3);
+
+    const patient = makePatient();
+    await patientsRepository.create(patient);
+
+    const dentist = makeDentist();
+    await dentistsRepository.create(dentist);
+
+    await expect(
+      scheduleAppointment.execute({
+        patientId: patient.id,
+        dentistId: dentist.id,
+        startsAt,
+        endsAt,
+      }),
+    ).rejects.toBeInstanceOf(InvalidStartDateError);
+  });
+
+  it('cannot create an appointment with end date before start date', async () => {
+    const startsAt = getFutureDate('2022-12-10 16:00');
+    const endsAt = getFutureDate('2022-12-10 15:00');
+
+    const patient = makePatient();
+    await patientsRepository.create(patient);
+
+    const dentist = makeDentist();
+    await dentistsRepository.create(dentist);
+
+    await expect(
+      scheduleAppointment.execute({
+        patientId: patient.id,
+        dentistId: dentist.id,
+        startsAt,
+        endsAt,
+      }),
+    ).rejects.toBeInstanceOf(InvalidEndDateError);
   });
 
   it('should not be able to schedule an appointment with a non existing patient', async () => {

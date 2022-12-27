@@ -10,18 +10,6 @@ export interface AppointmentProps {
 
 export class Appointment extends BaseEntity<AppointmentProps> {
   constructor(props: EntityInput<AppointmentProps>, id?: Id) {
-    // const { startsAt, endsAt } = props;
-
-    // if (startsAt <= new Date()) {
-    //   throw new RequestError(
-    //     'Start date must be greater than the current date.',
-    //   );
-    // }
-
-    // if (endsAt <= startsAt) {
-    //   throw new RequestError('End date must be greater than the start date.');
-    // }
-
     super(props, id);
   }
 
