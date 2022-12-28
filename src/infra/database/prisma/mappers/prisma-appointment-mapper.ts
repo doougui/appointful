@@ -15,13 +15,16 @@ export class PrismaAppointmentMapper {
   }
 
   static toDomain(appointment: Appointment) {
-    return new AppointmentEntity({
-      patientId: appointment.patientId,
-      dentistId: appointment.dentistId,
-      startsAt: new Date(appointment.startsAt),
-      endsAt: new Date(appointment.endsAt),
-      canceledAt: appointment.canceledAt,
-      createdAt: appointment.createdAt,
-    });
+    return new AppointmentEntity(
+      {
+        patientId: appointment.patientId,
+        dentistId: appointment.dentistId,
+        startsAt: new Date(appointment.startsAt),
+        endsAt: new Date(appointment.endsAt),
+        canceledAt: appointment.canceledAt,
+        createdAt: appointment.createdAt,
+      },
+      appointment.id,
+    );
   }
 }

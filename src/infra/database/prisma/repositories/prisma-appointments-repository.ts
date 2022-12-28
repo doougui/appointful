@@ -1,4 +1,5 @@
 import { Appointment } from '@application/entities/appointment';
+import { Dentist } from '@application/entities/dentist';
 import { AppointmentsRepository } from '@application/repositories/appointments-repository';
 import { prisma } from '../client';
 import { PrismaAppointmentMapper } from '../mappers/prisma-appointment-mapper';
@@ -38,22 +39,27 @@ export class PrismaAppointmentsRepository implements AppointmentsRepository {
     return appointments.map(PrismaAppointmentMapper.toDomain);
   }
 
-  async findOverlappingAppointment(): Promise<Appointment | null> {
-    return null;
-    // const overlappingAppointment = await prisma.appointment.findFirst({
-    //   where: {
-    //     startsAt: {
-    //       gte: startsAt,
-    //     },
-    //     endsAt: {},
-    //   },
-    // });
+  async findOverlappingAppointment(
+    startsAt: Date,
+    endsAt: Date,
+    dentist: Dentist,
+  ): Promise<Appointment | null> {
+    const overlappingAppointment = await prisma.appointment.findFirst({
+      where: {
+        OR: [
+          { endsAt: { lte: endsAt, gte: startsAt } },
+          { startsAt: { gte: startsAt, lte: endsAt } },
+          { endsAt: { gte: endsAt }, startsAt: { lte: startsAt } },
+        ],
+        dentistId: dentist.id,
+      },
+    });
 
-    // if (!overlappingAppointment) {
-    //   return null;
-    // }
+    if (!overlappingAppointment) {
+      return null;
+    }
 
-    // return PrismaAppointmentMapper.toDomain(overlappingAppointment);
+    return PrismaAppointmentMapper.toDomain(overlappingAppointment);
   }
 
   async create(appointment: Appointment) {

@@ -4,10 +4,13 @@ import { Dentist } from '@prisma/client';
 
 export class PrismaDentistMapper {
   static toDomain(dentist: Dentist) {
-    return new DentistEntity({
-      name: dentist.name,
-      email: new Email(dentist.email),
-      createdAt: dentist.createdAt,
-    });
+    return new DentistEntity(
+      {
+        name: dentist.name,
+        email: new Email(dentist.email),
+        createdAt: dentist.createdAt,
+      },
+      dentist.id,
+    );
   }
 }
