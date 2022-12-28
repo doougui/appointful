@@ -3,6 +3,12 @@ import { prisma } from '../client';
 import { PrismaDentistMapper } from '../mappers/prisma-dentist-mapper';
 
 export class PrismaDentistsRepository implements DentistsRepository {
+  async findAll() {
+    const dentists = await prisma.dentist.findMany();
+
+    return dentists.map(PrismaDentistMapper.toDomain);
+  }
+
   async findById(dentistId: string) {
     const dentist = await prisma.dentist.findUnique({
       where: {

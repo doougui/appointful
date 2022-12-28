@@ -4,7 +4,7 @@ import { GetPatientAppointments } from '@application/use-cases/appointments/get-
 import {
   GetPatientAppointmentsInputDTO,
   GetPatientAppointmentsOutputDTO,
-} from '@infra/http/dtos/get-patient-appointments-dto';
+} from '@infra/http/dtos/appointments/get-patient-appointments-dto';
 import { AppointmentViewModel } from '@infra/http/view-models/appointment-view-model';
 
 export class GetPatientAppointmentsController

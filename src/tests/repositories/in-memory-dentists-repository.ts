@@ -4,6 +4,10 @@ import { DentistsRepository } from '@application/repositories/dentists-repositor
 export class InMemoryDentistsRepository implements DentistsRepository {
   public dentists: Dentist[] = [];
 
+  async findAll() {
+    return this.dentists;
+  }
+
   async findById(dentistId: string) {
     const dentist = this.dentists.find((item) => item.id === dentistId);
 

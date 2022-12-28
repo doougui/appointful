@@ -1,4 +1,4 @@
-import { AppointmentHttpViewModel } from '../view-models/appointment-view-model';
+import { AppointmentHttpViewModel } from '@infra/http/view-models/appointment-view-model';
 
 export interface ScheduleAppointmentInputDTO {
   patientId: string;

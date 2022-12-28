@@ -6,7 +6,7 @@ import { ScheduleAppointment } from '@application/use-cases/appointments/schedul
 import {
   ScheduleAppointmentInputDTO,
   ScheduleAppointmentOutputDTO,
-} from '@infra/http/dtos/schedule-appointment-dto';
+} from '@infra/http/dtos/appointments/schedule-appointment-dto';
 import { AppointmentViewModel } from '@infra/http/view-models/appointment-view-model';
 import { isValidDate } from '@utils/is-valid-date';
 import { parseISO } from 'date-fns';
