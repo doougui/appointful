@@ -41,4 +41,9 @@ export class InMemoryDentistsRepository implements DentistsRepository {
       this.dentists[dentistIndex] = dentist;
     }
   }
+
+  async delete(dentistId: string) {
+    const dentists = this.dentists.filter((item) => item.id !== dentistId);
+    this.dentists = dentists;
+  }
 }

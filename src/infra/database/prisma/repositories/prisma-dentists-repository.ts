@@ -54,4 +54,12 @@ export class PrismaDentistsRepository implements DentistsRepository {
       data: raw,
     });
   }
+
+  async delete(dentistId: string) {
+    await prisma.dentist.delete({
+      where: {
+        id: dentistId,
+      },
+    });
+  }
 }
