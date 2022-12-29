@@ -3,15 +3,15 @@ import { Email } from '@application/entities/value-objects/email';
 import { makeDentist } from '@tests/factories/dentist-factory';
 import { InMemoryDentistsRepository } from '@tests/repositories/in-memory-dentists-repository';
 import { describe, expect, it } from 'vitest';
-import { CreateDentist } from './create-dentist';
+import { RegisterDentist } from './register-dentist';
 import { DentistAlreadyExists } from './errors/dentist-already-exists';
 
-describe('CreateDentist', () => {
-  it('should create a dentist', async () => {
+describe('RegisterDentist', () => {
+  it('should register a dentist', async () => {
     const dentistsRepository = new InMemoryDentistsRepository();
-    const createDentist = new CreateDentist(dentistsRepository);
+    const registerDentist = new RegisterDentist(dentistsRepository);
 
-    const { dentist } = await createDentist.execute({
+    const { dentist } = await registerDentist.execute({
       name: 'John Doe',
       email: 'john@doe.com',
     });
@@ -20,9 +20,9 @@ describe('CreateDentist', () => {
     expect(dentistsRepository.dentists[0].name).toBe('John Doe');
   });
 
-  it('should not be able to create a dentist with existing email', async () => {
+  it('should not be able to register a dentist that already exists', async () => {
     const dentistsRepository = new InMemoryDentistsRepository();
-    const createDentist = new CreateDentist(dentistsRepository);
+    const registerDentist = new RegisterDentist(dentistsRepository);
 
     const dentist = makeDentist({
       email: new Email('existing@email.com'),
@@ -30,7 +30,7 @@ describe('CreateDentist', () => {
     await dentistsRepository.create(dentist);
 
     expect(
-      createDentist.execute({
+      registerDentist.execute({
         name: 'John Doe',
         email: 'existing@email.com',
       }),

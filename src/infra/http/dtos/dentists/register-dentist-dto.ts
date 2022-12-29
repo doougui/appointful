@@ -1,8 +1,8 @@
 import { DentistHttpViewModel } from '@infra/http/view-models/dentist-view-model';
 
-export type CreateDentistInputDTO = {
+export type RegisterDentistInputDTO = {
   name: string;
   email: string;
 };
 
-export type CreateDentistOutputDTO = DentistHttpViewModel;
+export type RegisterDentistOutputDTO = DentistHttpViewModel;

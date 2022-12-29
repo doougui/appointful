@@ -3,15 +3,15 @@ import { Email } from '@application/entities/value-objects/email';
 import { DentistsRepository } from '@application/repositories/dentists-repository';
 import { DentistAlreadyExists } from './errors/dentist-already-exists';
 
-interface CreateDentistRequest {
+interface RegisterDentistRequest {
   name: string;
   email: string;
 }
 
-export class CreateDentist {
+export class RegisterDentist {
   constructor(private dentistsRepository: DentistsRepository) {}
 
-  private async validate(request: CreateDentistRequest) {
+  private async validate(request: RegisterDentistRequest) {
     const { email } = request;
 
     const dentistExists = await this.dentistsRepository.findByEmail(email);
@@ -19,7 +19,7 @@ export class CreateDentist {
     if (dentistExists) throw new DentistAlreadyExists();
   }
 
-  async execute(request: CreateDentistRequest) {
+  async execute(request: RegisterDentistRequest) {
     await this.validate(request);
 
     const { name, email } = request;
