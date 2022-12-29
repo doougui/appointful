@@ -65,9 +65,9 @@ export class ScheduleAppointment {
   async execute(
     request: ScheduleAppointmentRequest,
   ): Promise<ScheduleAppointmentResponse> {
-    const { patientId, dentistId, startsAt, endsAt } = request;
+    await this.validate(request);
 
-    await this.validate({ patientId, dentistId, startsAt, endsAt });
+    const { patientId, dentistId, startsAt, endsAt } = request;
 
     const appointment = new Appointment({
       patientId,

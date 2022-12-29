@@ -1,3 +1,4 @@
+import { Dentist } from '@application/entities/dentist';
 import { DentistsRepository } from '@application/repositories/dentists-repository';
 import { prisma } from '../client';
 import { PrismaDentistMapper } from '../mappers/prisma-dentist-mapper';
@@ -23,11 +24,34 @@ export class PrismaDentistsRepository implements DentistsRepository {
     return PrismaDentistMapper.toDomain(dentist);
   }
 
-  async save() {
-    throw new Error('Method not implemented.');
+  async findByEmail(email: string) {
+    const dentist = await prisma.dentist.findUnique({
+      where: { email },
+    });
+
+    if (!dentist) {
+      return null;
+    }
+
+    return PrismaDentistMapper.toDomain(dentist);
   }
 
-  async create() {
-    throw new Error('Method not implemented.');
+  async create(dentist: Dentist) {
+    const raw = PrismaDentistMapper.toPrisma(dentist);
+
+    await prisma.dentist.create({
+      data: raw,
+    });
+  }
+
+  async save(dentist: Dentist) {
+    const raw = PrismaDentistMapper.toPrisma(dentist);
+
+    await prisma.dentist.update({
+      where: {
+        id: raw.id,
+      },
+      data: raw,
+    });
   }
 }

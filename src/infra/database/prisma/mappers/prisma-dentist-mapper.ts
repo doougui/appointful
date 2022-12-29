@@ -3,6 +3,15 @@ import { Email } from '@application/entities/value-objects/email';
 import { Dentist } from '@prisma/client';
 
 export class PrismaDentistMapper {
+  static toPrisma(dentist: DentistEntity) {
+    return {
+      id: dentist.id,
+      name: dentist.name,
+      email: dentist.email.value,
+      createdAt: dentist.createdAt,
+    };
+  }
+
   static toDomain(dentist: Dentist) {
     return new DentistEntity(
       {

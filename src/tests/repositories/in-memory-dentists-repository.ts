@@ -18,6 +18,16 @@ export class InMemoryDentistsRepository implements DentistsRepository {
     return dentist;
   }
 
+  async findByEmail(email: string) {
+    const dentist = this.dentists.find((item) => item.email.value === email);
+
+    if (!dentist) {
+      return null;
+    }
+
+    return dentist;
+  }
+
   async create(dentist: Dentist): Promise<void> {
     this.dentists.push(dentist);
   }

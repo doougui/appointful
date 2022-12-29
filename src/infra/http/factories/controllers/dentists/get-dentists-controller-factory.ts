@@ -4,11 +4,9 @@ import { GetDentistsController } from '@infra/http/controllers/dentists/get-dent
 
 export function makeGetDentistsController() {
   const prismaDentistsRepository = new PrismaDentistsRepository();
-  const getPatientDentistsUseCase = new GetDentists(prismaDentistsRepository);
+  const getDentistsUseCase = new GetDentists(prismaDentistsRepository);
 
-  const getPatientDentistsController = new GetDentistsController(
-    getPatientDentistsUseCase,
-  );
+  const getDentistsController = new GetDentistsController(getDentistsUseCase);
 
-  return getPatientDentistsController;
+  return getDentistsController;
 }
