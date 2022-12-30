@@ -1,24 +1,29 @@
 import { Controller } from '@application/infra/controller';
-import { created } from '@application/infra/http-response';
-import { InvalidDentistError } from '@application/use-cases/appointments/errors/invalid-dentist';
-import { InvalidPatientError } from '@application/use-cases/appointments/errors/invalid-patient';
+import { clientError, created } from '@application/infra/http-response';
+import { Validator } from '@application/infra/validator';
 import { ScheduleAppointment } from '@application/use-cases/appointments/schedule-appointment';
 import {
   ScheduleAppointmentInputDTO,
   ScheduleAppointmentOutputDTO,
 } from '@infra/http/dtos/appointments/schedule-appointment-dto';
 import { AppointmentViewModel } from '@infra/http/view-models/appointment-view-model';
-import { isValidDate } from '@utils/is-valid-date';
 import { parseISO } from 'date-fns';
-import { InvalidDatesError } from './errors/invalid-dates';
 
 export class ScheduleAppointmentController
   implements
     Controller<ScheduleAppointmentInputDTO, ScheduleAppointmentOutputDTO>
 {
-  constructor(private scheduleAppointmentUseCase: ScheduleAppointment) {}
+  constructor(
+    private scheduleAppointmentUseCase: ScheduleAppointment,
+    private validation: Validator<ScheduleAppointmentInputDTO>,
+  ) {}
 
   async handle(request: ScheduleAppointmentInputDTO) {
+    const validationError = this.validation.validate(request);
+    if (validationError) {
+      return clientError(validationError);
+    }
+
     const {
       dentistId,
       patientId,
@@ -28,13 +33,6 @@ export class ScheduleAppointmentController
 
     const startsAt = parseISO(rawStartsAt);
     const endsAt = parseISO(rawEndsAt);
-
-    if (!patientId) throw new InvalidPatientError();
-    if (!dentistId) throw new InvalidDentistError();
-
-    if (!isValidDate(startsAt) || !isValidDate(endsAt)) {
-      throw new InvalidDatesError();
-    }
 
     const { appointment } = await this.scheduleAppointmentUseCase.execute({
       dentistId,

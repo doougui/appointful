@@ -7,4 +7,4 @@ export interface ScheduleAppointmentInputDTO {
   endsAt: string;
 }
 
-export type ScheduleAppointmentOutputDTO = AppointmentHttpViewModel;
+export type ScheduleAppointmentOutputDTO = AppointmentHttpViewModel | undefined;
