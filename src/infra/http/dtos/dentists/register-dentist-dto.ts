@@ -5,4 +5,4 @@ export type RegisterDentistInputDTO = {
   email: string;
 };
 
-export type RegisterDentistOutputDTO = DentistHttpViewModel;
+export type RegisterDentistOutputDTO = DentistHttpViewModel | undefined;
