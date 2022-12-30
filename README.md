@@ -36,8 +36,8 @@ yarn test
 - [x] Add husky and lint-staged to check if everything is fine before commiting
 - [x] List patient's appointments
 - [x] Allow to list appointments from a specific dentist
+- [x] Create payload data validation
 - [ ] Create http routes
-- [ ] Create payload data validation
 
 ## Author
 

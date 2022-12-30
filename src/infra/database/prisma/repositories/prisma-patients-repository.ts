@@ -5,7 +5,7 @@ import { PrismaPatientMapper } from '../mappers/prisma-patient-mapper';
 
 export class PrismaPatientsRepository implements PatientsRepository {
   async findAll() {
-    const patients = await prisma.dentist.findMany();
+    const patients = await prisma.patient.findMany();
 
     return patients.map(PrismaPatientMapper.toDomain);
   }
@@ -39,7 +39,7 @@ export class PrismaPatientsRepository implements PatientsRepository {
   async create(patient: Patient) {
     const raw = PrismaPatientMapper.toPrisma(patient);
 
-    await prisma.dentist.create({
+    await prisma.patient.create({
       data: raw,
     });
   }
