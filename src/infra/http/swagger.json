@@ -1,0 +1,132 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Appointments API",
+    "description": "A simple appointments api",
+    "version": "1.0.0",
+    "contact": {
+      "name": "Douglas Pinheiro Goulart",
+      "email": "douglaspigoulart@gmail.com",
+      "url": "https://douglasgoulart.com/"
+    }
+  },
+  "servers": [
+    {
+      "url": "http://localhost:3333",
+      "description": "Local API server"
+    }
+  ],
+  "paths": {
+    "/patients": {
+      "get": {
+        "summary": "Get the list of all patients",
+        "description": "List all registered patients",
+        "tags": ["Patients"],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Patient"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Register a new patient",
+        "description": "Creates a new patient",
+        "tags": ["Patients"],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "name",
+            "description": "Name of the patient",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "example": "Douglas Pinheiro Goulart"
+          },
+          {
+            "in": "body",
+            "name": "email",
+            "description": "The email of the patient",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "example": "douglaspigoulart@gmail.com"
+          },
+          {
+            "in": "body",
+            "name": "phone",
+            "description": "The phone number of the patient",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "example": "+55 55 5555-5555"
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Bad request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "type": "object",
+                      "$ref": "#/components/schemas/Patient"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Patient created successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/Patient"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Patient": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "phone": {
+            "type": "string"
+          },
+          "createdAt": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}

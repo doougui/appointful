@@ -11,6 +11,7 @@
     "strictNullChecks": true,
     "skipLibCheck": true,
     "allowJs": true,
+    "resolveJsonModule": true,
     "paths": {
       "@application/*": ["./src/application/*"],
       "@infra/*": ["./src/infra/*"],
