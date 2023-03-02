@@ -80,12 +80,11 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "oneOf": [
-                    {
-                      "type": "object",
-                      "$ref": "#/components/schemas/Patient"
-                    }
-                  ]
+                  "type": "object",
+                  "$ref": "#/components/schemas/ApiError"
+                },
+                "example": {
+                  "error": "The provided email address is invalid"
                 }
               }
             }
@@ -107,6 +106,14 @@
   },
   "components": {
     "schemas": {
+      "ApiError": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string"
+          }
+        }
+      },
       "Patient": {
         "type": "object",
         "properties": {
