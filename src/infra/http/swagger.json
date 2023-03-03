@@ -138,6 +138,118 @@
           }
         }
       }
+    },
+    "/dentists": {
+      "get": {
+        "summary": "Get the list of all dentists",
+        "description": "List all registered dentists",
+        "tags": ["Dentists"],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Dentist"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Register a new dentist",
+        "description": "Creates a new dentist",
+        "tags": ["Dentists"],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "name",
+            "description": "Name of the dentist",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "example": "Douglas Pinheiro Goulart"
+          },
+          {
+            "in": "body",
+            "name": "email",
+            "description": "The email of the dentist",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "example": "douglaspigoulart@gmail.com"
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Bad request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/ApiError"
+                },
+                "example": {
+                  "error": "The provided email address is invalid."
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Dentist created successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/Dentist"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "Deletes a dentist",
+        "description": "Removes a dentist from the registry",
+        "tags": ["Dentists"],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "dentistId",
+            "description": "ID of the dentist",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "example": "2a6e249a-077b-4b38-b90d-7ecef99a090f"
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Bad request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/ApiError"
+                },
+                "example": {
+                  "error": "Dentist not found."
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "Dentist deleted successfully"
+          }
+        }
+      }
     }
   },
   "components": {
@@ -163,6 +275,23 @@
             "type": "string"
           },
           "phone": {
+            "type": "string"
+          },
+          "createdAt": {
+            "type": "string"
+          }
+        }
+      },
+      "Dentist": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "email": {
             "type": "string"
           },
           "createdAt": {
