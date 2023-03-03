@@ -84,7 +84,7 @@
                   "$ref": "#/components/schemas/ApiError"
                 },
                 "example": {
-                  "error": "The provided email address is invalid"
+                  "error": "The provided email address is invalid."
                 }
               }
             }
@@ -99,6 +99,42 @@
                 }
               }
             }
+          }
+        }
+      },
+      "delete": {
+        "summary": "Deletes a patient",
+        "description": "Removes a patient from the registry",
+        "tags": ["Patients"],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "patientId",
+            "description": "ID of the patient",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "example": "2a6e249a-077b-4b38-b90d-7ecef99a090f"
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Bad request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/ApiError"
+                },
+                "example": {
+                  "error": "Patient not found."
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "Patient deleted successfully"
           }
         }
       }
