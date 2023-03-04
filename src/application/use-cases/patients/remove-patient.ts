@@ -13,9 +13,7 @@ export class RemovePatient {
 
     const patient = await this.patientsRepository.findById(patientId);
 
-    if (!patient) {
-      throw new PatientNotFound();
-    }
+    if (!patient) throw new PatientNotFound();
 
     await this.patientsRepository.delete(patientId);
   }

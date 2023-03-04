@@ -250,6 +250,11 @@
           }
         }
       }
+    },
+    "/appointments": {
+      "get": {
+
+      }
     }
   },
   "components": {
