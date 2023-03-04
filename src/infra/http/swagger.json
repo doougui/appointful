@@ -101,7 +101,9 @@
             }
           }
         }
-      },
+      }
+    },
+    "/patients/{patientId}": {
       "delete": {
         "summary": "Deletes a patient",
         "description": "Removes a patient from the registry",
@@ -213,7 +215,9 @@
             }
           }
         }
-      },
+      }
+    },
+    "/dentists/{dentistId}": {
       "delete": {
         "summary": "Deletes a dentist",
         "description": "Removes a dentist from the registry",
@@ -251,7 +255,7 @@
         }
       }
     },
-    "/appointments": {
+    "/appointments/dentist/{dentistId}": {
       "get": {
 
       }
