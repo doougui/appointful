@@ -288,6 +288,40 @@
           }
         }
       }
+    },
+    "/appointments/patient/{patientId}": {
+      "get": {
+        "summary": "List appointments of a patient",
+        "description": "List all of the appointments of a specific patient",
+        "tags": ["Appointments", "Patients"],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "patientId",
+            "description": "ID of the patient",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "example": "3da84353-d340-4f72-9856-17e22e34a62f"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Appointment"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
     }
   },
   "components": {
