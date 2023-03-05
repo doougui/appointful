@@ -322,6 +322,82 @@
           }
         }
       }
+    },
+    "/appointments": {
+      "post": {
+        "summary": "Schedule a new appointment",
+        "description": "Schedules a new appointment with start and end date",
+        "tags": ["Appointments", "Dentists", "Patients"],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "patientId",
+            "description": "ID of the patient",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "example": "2a6e249a-077b-4b38-b90d-7ecef99a090f"
+          },
+          {
+            "in": "body",
+            "name": "dentistId",
+            "description": "ID of the dentist",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "example": "62c676cf-3c71-447f-8145-b901fd299a01"
+          },
+          {
+            "in": "body",
+            "name": "startsAt",
+            "description": "Start date of the appointment",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "example": "2024-03-17 16:00:00"
+          },
+          {
+            "in": "body",
+            "name": "endsAt",
+            "description": "End date of the appointment",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "example": "2024-03-17 17:00:00"
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Bad request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/ApiError"
+                },
+                "example": {
+                  "error": "Another appointment overlaps this appointment dates."
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "Appointment scheduled successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/Appointment"
+                }
+              }
+            }
+          }
+        }
+      }
     }
   },
   "components": {
