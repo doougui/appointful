@@ -1,5 +1,5 @@
 {
-  "openapi": "3.0.0",
+  "openapi": "3.0.3",
   "info": {
     "title": "Appointments API",
     "description": "A simple appointments api",
@@ -257,7 +257,36 @@
     },
     "/appointments/dentist/{dentistId}": {
       "get": {
-
+        "summary": "List appointments of a dentist",
+        "description": "List all of the appointments of a specific dentist",
+        "tags": ["Appointments", "Dentists"],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "dentistId",
+            "description": "ID of the dentist",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "example": "3da84353-d340-4f72-9856-17e22e34a62f"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Appointment"
+                  }
+                }
+              }
+            }
+          }
+        }
       }
     }
   },
@@ -289,6 +318,13 @@
           "createdAt": {
             "type": "string"
           }
+        },
+        "example": {
+          "id": "2a6e249a-077b-4b38-b90d-7ecef99a090f",
+          "name": "Julio Márcio Campos",
+          "email": "juliomarciocampos@acritica.com.br",
+          "phone": "+55 38 98833-9465",
+          "createdAt": "2022-12-22T19:06:41.145Z"
         }
       },
       "Dentist": {
@@ -306,6 +342,48 @@
           "createdAt": {
             "type": "string"
           }
+        },
+        "example": {
+          "id": "62c676cf-3c71-447f-8145-b901fd299a01",
+          "name": "Osvaldo Leonardo da Mota",
+          "email": "osvaldo.leonardo.damota@wredenborg.se",
+          "createdAt": "2022-12-22T19:05:56.766Z"
+        }
+      },
+      "Appointment": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "patientId": {
+            "type": "string"
+          },
+          "dentistId": {
+            "type": "string"
+          },
+          "startsAt": {
+            "type": "string"
+          },
+          "endsAt": {
+            "type": "string"
+          },
+          "canceledAt": {
+            "type": "string",
+            "nullable": true
+          },
+          "createdAt": {
+            "type": "string"
+          }
+        },
+        "example": {
+          "id": "491514a4-a4d9-4c61-b365-481aa1703a3c",
+          "patientId": "2a6e249a-077b-4b38-b90d-7ecef99a090f",
+          "dentistId": "62c676cf-3c71-447f-8145-b901fd299a01",
+          "startsAt": "2023-03-15T12:00:00.000Z",
+          "endsAt": "2023-03-15T14:00:00.000Z",
+          "canceledAt": null,
+          "createdAt": "2022-12-28T17:35:49.493Z"
         }
       }
     }
