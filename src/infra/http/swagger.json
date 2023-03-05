@@ -398,6 +398,43 @@
           }
         }
       }
+    },
+    "/appointments/cancel/{appointmentId}": {
+      "patch": {
+        "summary": "Cancels a appointment",
+        "description": "Cancels an upcoming appointment",
+        "tags": ["Appointments"],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "appointmentId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "example": "833841c0-c83b-414a-b149-069994438dca"
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Bad request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/ApiError"
+                },
+                "example": {
+                  "error": "Appointment not found."
+                }
+              }
+            }
+          },
+          "204": {
+            "description": "Appointment canceled successfully"
+          }
+        }
+      }
     }
   },
   "components": {
