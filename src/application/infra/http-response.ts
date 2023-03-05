@@ -10,6 +10,13 @@ export function ok<T = undefined>(dto?: T): HttpResponse<T> {
   };
 }
 
+export function noContent() {
+  return {
+    statusCode: 204,
+    body: undefined,
+  };
+}
+
 export function created<T = undefined>(dto?: T): HttpResponse<T> {
   return {
     statusCode: 201,
