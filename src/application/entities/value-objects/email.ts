@@ -1,5 +1,5 @@
 import validator from 'validator';
-import { InvalidEmailError } from '../errors/invalid-email-errors';
+import { InvalidEmailError } from '../errors/invalid-email-error';
 
 export class Email {
   private readonly email: string;

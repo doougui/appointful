@@ -1,4 +1,5 @@
 import { BaseEntity, EntityInput, Id } from './base-entity';
+import { UncancelableAppointment } from './errors/uncancelable-appointment-error';
 
 export interface AppointmentProps {
   patientId: string;
@@ -50,6 +51,10 @@ export class Appointment extends BaseEntity<AppointmentProps> {
   }
 
   public cancel() {
+    if (this.props.startsAt < new Date()) {
+      throw new UncancelableAppointment();
+    }
+
     this.props.canceledAt = new Date();
   }
 }

@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { InvalidEmailError } from '../errors/invalid-email-errors';
+import { InvalidEmailError } from '../errors/invalid-email-error';
 import { Email } from './email';
 
 describe('Email', () => {

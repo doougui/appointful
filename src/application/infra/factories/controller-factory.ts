@@ -1,4 +1,4 @@
-import { RequestError } from '@infra/http/errors/request-error';
+import { InputError } from 'src/errors/input-error';
 import { Controller } from '../controller';
 import { clientError, fail } from '../http-response';
 
@@ -11,7 +11,7 @@ export async function makeController<T, R>(
   } catch (e) {
     if (!(e instanceof Error)) return fail(e);
 
-    if (e instanceof RequestError) {
+    if (e instanceof InputError) {
       return clientError(e);
     }
 
