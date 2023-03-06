@@ -37,7 +37,7 @@ yarn test
 - [x] List patient's appointments
 - [x] Allow to list appointments from a specific dentist
 - [x] Create payload data validation
-- [ ] Create http routes
+- [x] Create http routes
 
 ## Author
 
