@@ -1,4 +1,4 @@
-<h1 align="center">Welcome to dentists-api 👋</h1>
+<h1 align="center">Welcome to appointments-api 👋</h1>
 <p>
   <img alt="Version" src="https://img.shields.io/badge/version-1.0.0-blue.svg?cacheSeconds=2592000" />
   <a href="#" target="_blank">
@@ -6,7 +6,7 @@
   </a>
 </p>
 
-> A simple dentists api
+> A simple appointments api
 
 ## Install
 
@@ -49,7 +49,7 @@ yarn test
 
 ## 🤝 Contributing
 
-Contributions, issues and feature requests are welcome!<br />Feel free to check [issues page](https://github.com/doougui/dentists-api/issues).
+Contributions, issues and feature requests are welcome!<br />Feel free to check [issues page](https://github.com/doougui/appointments-api/issues).
 
 ## Show your support
 
