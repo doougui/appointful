@@ -26,6 +26,14 @@ yarn dev
 yarn test
 ```
 
+## Docs
+
+You can access the documentation by using the `/docs` endpoint.
+
+`http://localhost:3333/docs`
+
+![Swagger documentation](image.png)
+
 ## TO-DO
 
 - [x] Allow to cancel an appointment
