@@ -12,6 +12,10 @@
   },
   "servers": [
     {
+      "url": "https://appointments-api-2r9j.onrender.com",
+      "description": "Production API server"
+    },
+    {
       "url": "http://localhost:3333",
       "description": "Local API server"
     }
