@@ -14,7 +14,7 @@
     "typecheck": "tsc --project tsconfig.json --noEmit",
     "prepare": "husky install",
     "build": "tsup src",
-    "start": "node src/infra/http/server.js"
+    "start": "node ./dist/infra/http/server.js"
   },
   "dependencies": {
     "@prisma/client": "^4.11.0",
