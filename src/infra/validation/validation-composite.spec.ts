@@ -1,16 +1,16 @@
 import { describe, expect, it } from 'vitest';
 import { ValidationError } from './errors/validation-error';
 import { RequiredFieldValidation } from './required-field-validation';
-import { ValidatorCompositor } from './validator-compositor';
+import { ValidationComposite } from './validation-composite';
 
-describe('ValidatorCompositor', () => {
+describe('ValidatorComposite', () => {
   interface Fields {
     field1: string;
     field2: string;
     field3: string;
   }
 
-  const validator = new ValidatorCompositor<Fields>([
+  const validator = new ValidationComposite<Fields>([
     new RequiredFieldValidation('field1'),
     new RequiredFieldValidation('field2'),
     new RequiredFieldValidation('field3'),

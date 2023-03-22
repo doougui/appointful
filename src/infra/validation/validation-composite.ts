@@ -1,7 +1,7 @@
 import { Validator } from '@application/infra/validator';
 import { ValidationError } from './errors/validation-error';
 
-export class ValidatorCompositor<T> implements Validator<T> {
+export class ValidationComposite<T> implements Validator<T> {
   constructor(private readonly validators: Validator<T>[]) {}
 
   validate(input: T): ValidationError | null {

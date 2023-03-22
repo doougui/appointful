@@ -2,7 +2,7 @@ import { Validator } from '@application/infra/validator';
 import { ScheduleAppointmentInputDTO } from '@infra/http/dtos/appointments/schedule-appointment-dto';
 import { DateFieldValidation } from '@infra/validation/date-field-validation';
 import { RequiredFieldValidation } from '@infra/validation/required-field-validation';
-import { ValidatorCompositor } from '@infra/validation/validator-compositor';
+import { ValidationComposite } from '@infra/validation/validation-composite';
 
 export function makeScheduleAppointmentValidation() {
   const validations: Validator<ScheduleAppointmentInputDTO>[] = [];
@@ -19,5 +19,5 @@ export function makeScheduleAppointmentValidation() {
     );
   }
 
-  return new ValidatorCompositor(validations);
+  return new ValidationComposite(validations);
 }

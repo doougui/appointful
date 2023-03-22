@@ -3,7 +3,7 @@ import { Validator } from '@application/infra/validator';
 import { RegisterPatientInputDTO } from '@infra/http/dtos/patients/register-patient-dto';
 import { EmailFieldValidation } from '@infra/validation/email-field-validation';
 import { RequiredFieldValidation } from '@infra/validation/required-field-validation';
-import { ValidatorCompositor } from '@infra/validation/validator-compositor';
+import { ValidationComposite } from '@infra/validation/validation-composite';
 
 export function makeRegisterPatientValidation() {
   const validations: Validator<RegisterPatientInputDTO>[] = [];
@@ -18,5 +18,5 @@ export function makeRegisterPatientValidation() {
     new EmailFieldValidation('email', new EmailValidatorAdapter()),
   );
 
-  return new ValidatorCompositor(validations);
+  return new ValidationComposite(validations);
 }

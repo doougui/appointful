@@ -1,7 +1,7 @@
 import { Validator } from '@application/infra/validator';
 import { CancelAppointmentInputDTO } from '@infra/http/dtos/appointments/cancel-appointment-dto';
 import { RequiredFieldValidation } from '@infra/validation/required-field-validation';
-import { ValidatorCompositor } from '@infra/validation/validator-compositor';
+import { ValidationComposite } from '@infra/validation/validation-composite';
 
 export function makeCancelAppointmentValidation() {
   const validations: Validator<CancelAppointmentInputDTO>[] = [];
@@ -12,5 +12,5 @@ export function makeCancelAppointmentValidation() {
     );
   }
 
-  return new ValidatorCompositor(validations);
+  return new ValidationComposite(validations);
 }

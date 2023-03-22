@@ -1,7 +1,7 @@
 import { Validator } from '@application/infra/validator';
 import { RemoveDentistInputDTO } from '@infra/http/dtos/dentists/remove-dentist-dto';
 import { RequiredFieldValidation } from '@infra/validation/required-field-validation';
-import { ValidatorCompositor } from '@infra/validation/validator-compositor';
+import { ValidationComposite } from '@infra/validation/validation-composite';
 
 export function makeRemoveDentistValidation() {
   const validations: Validator<RemoveDentistInputDTO>[] = [];
@@ -10,5 +10,5 @@ export function makeRemoveDentistValidation() {
     validations.push(new RequiredFieldValidation<RemoveDentistInputDTO>(field));
   }
 
-  return new ValidatorCompositor(validations);
+  return new ValidationComposite(validations);
 }
