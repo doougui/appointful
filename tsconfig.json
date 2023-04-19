@@ -21,6 +21,7 @@
   },
   "include": [
     "src/**/*.ts",
-    "vitest.config.ts"
+    "vitest.unit.config.ts",
+    "prisma/**/*.ts",
   ]
 }
