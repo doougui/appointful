@@ -1,5 +1,5 @@
 import { Controller } from '@application/infra/controller';
-import { clientError, ok } from '@application/infra/http-response';
+import { clientError, noContent } from '@application/infra/http-response';
 import { Validator } from '@application/infra/validator';
 import { RemovePatient } from '@application/use-cases/patients/remove-patient';
 import { RemovePatientInputDTO } from '@infra/http/dtos/patients/remove-patient-dto';
@@ -22,6 +22,6 @@ export class RemovePatientController
 
     await this.removePatient.execute({ patientId });
 
-    return ok();
+    return noContent();
   }
 }
