@@ -20,7 +20,7 @@ describe('Register dentist', () => {
   });
 
   it('should not be able to register a dentist that already exists', async () => {
-    request(app).post('/dentists').send({
+    await request(app).post('/dentists').send({
       name: 'Emilly Débora da Paz',
       email: 'emilly.debora.dapaz@bool.com.br',
     });
