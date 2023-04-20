@@ -15,6 +15,8 @@ export class GetPatientsController
   async handle() {
     const { patients } = await this.getPatients.execute();
 
-    return ok<GetPatientsOutputDTO>(patients.map(PatientViewModel.toHTTP));
+    return ok<GetPatientsOutputDTO>({
+      patients: patients.map(PatientViewModel.toHTTP),
+    });
   }
 }
