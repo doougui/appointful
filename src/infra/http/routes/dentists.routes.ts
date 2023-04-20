@@ -7,7 +7,7 @@ import { makeRemoveDentistController } from '../factories/controllers/dentists/r
 const dentistsRoutes = Router();
 
 dentistsRoutes.get('/', adaptRoute(makeGetDentistsController()));
-dentistsRoutes.post('/register', adaptRoute(makeRegisterDentistController()));
+dentistsRoutes.post('/', adaptRoute(makeRegisterDentistController()));
 dentistsRoutes.delete('/:dentistId', adaptRoute(makeRemoveDentistController()));
 
 export { dentistsRoutes };

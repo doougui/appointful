@@ -7,7 +7,7 @@ import { makeRemovePatientController } from '../factories/controllers/patients/r
 const patientsRoutes = Router();
 
 patientsRoutes.get('/', adaptRoute(makeGetPatientsController()));
-patientsRoutes.post('/register', adaptRoute(makeRegisterPatientController()));
+patientsRoutes.post('/', adaptRoute(makeRegisterPatientController()));
 patientsRoutes.delete('/:patientId', adaptRoute(makeRemovePatientController()));
 
 export { patientsRoutes };
