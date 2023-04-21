@@ -3,7 +3,7 @@ import request from 'supertest';
 import { describe, expect, it } from 'vitest';
 
 describe('Remove dentist', () => {
-  it('should be able to delete a dentist', async () => {
+  it('should be able to remove a dentist', async () => {
     const dentistResponse = await request(app).post('/dentists').send({
       name: 'Emilly Débora da Paz',
       email: 'emilly.debora.dapaz@bool.com.br',

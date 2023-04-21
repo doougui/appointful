@@ -3,7 +3,7 @@ import request from 'supertest';
 import { describe, expect, it } from 'vitest';
 
 describe('Remove patient', () => {
-  it('should be able to delete a patient', async () => {
+  it('should be able to remove a patient', async () => {
     const patientResponse = await request(app).post('/patients').send({
       name: 'Oliver Rodrigo Bernardes',
       email: 'oliver-bernardes71@keffin.com.br',
