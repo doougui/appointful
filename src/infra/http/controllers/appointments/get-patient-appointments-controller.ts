@@ -20,8 +20,8 @@ export class GetPatientAppointmentsController
       patientId,
     });
 
-    return ok<GetPatientAppointmentsOutputDTO>(
-      appointments.map(AppointmentViewModel.toHTTP),
-    );
+    return ok<GetPatientAppointmentsOutputDTO>({
+      appointments: appointments.map(AppointmentViewModel.toHTTP),
+    });
   }
 }
