@@ -1,4 +1,4 @@
-import { BaseEntity, EntityInput, Id } from './base-entity';
+import { BaseEntity } from './base-entity';
 import { Email } from './value-objects/email';
 
 export interface PatientProps {
@@ -8,10 +8,6 @@ export interface PatientProps {
 }
 
 export class Patient extends BaseEntity<PatientProps> {
-  constructor(props: EntityInput<PatientProps>, id?: Id) {
-    super(props, id);
-  }
-
   public get name() {
     return this.props.name;
   }

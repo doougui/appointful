@@ -1,4 +1,4 @@
-import { BaseEntity, EntityInput, Id } from './base-entity';
+import { BaseEntity } from './base-entity';
 import { UncancelableAppointment } from './errors/uncancelable-appointment-error';
 
 export interface AppointmentProps {
@@ -10,10 +10,6 @@ export interface AppointmentProps {
 }
 
 export class Appointment extends BaseEntity<AppointmentProps> {
-  constructor(props: EntityInput<AppointmentProps>, id?: Id) {
-    super(props, id);
-  }
-
   public get patientId() {
     return this.props.patientId;
   }
