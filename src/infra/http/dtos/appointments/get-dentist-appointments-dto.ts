@@ -4,4 +4,6 @@ export interface GetDentistAppointmentsInputDTO {
   dentistId: string;
 }
 
-export type GetDentistAppointmentsOutputDTO = AppointmentHttpViewModel[];
+export type GetDentistAppointmentsOutputDTO = {
+  appointments: AppointmentHttpViewModel[];
+};

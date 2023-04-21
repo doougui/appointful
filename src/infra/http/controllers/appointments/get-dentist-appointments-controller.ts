@@ -20,8 +20,8 @@ export class GetDentistAppointmentsController
       dentistId,
     });
 
-    return ok<GetDentistAppointmentsOutputDTO>(
-      appointments.map(AppointmentViewModel.toHTTP),
-    );
+    return ok<GetDentistAppointmentsOutputDTO>({
+      appointments: appointments.map(AppointmentViewModel.toHTTP),
+    });
   }
 }
